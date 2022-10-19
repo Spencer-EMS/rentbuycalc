@@ -1,0 +1,30 @@
+.Totals{
+    width: 18rem;
+}
+
+.Totals h3{
+    text-align: left;
+}
+
+.Totals h4{
+    text-align: left;
+}
+
+.Totals p{
+    margin: 0.5rem 0;
+}
+
+.colFlex{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.Totals label{
+    text-align: left;
+    width: 100%;
+}
+
+.dropDown{
+    margin: 0.5rem;
+}
