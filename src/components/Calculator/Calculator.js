@@ -33,21 +33,19 @@ const Calculator = () => {
                     buyTotalCost={timePeriodCost}
                 />
                 <div className={style.colFlex}>
-                    <div className={style.BuyInput}>
-                        <BuyForm 
-                            monthlyCosts={monthlyCosts}
-                            upFrontCosts={upFrontCosts}
-                            setUpFrontCosts={setUpFrontCosts}
-                            setMonthlyCosts={setMonthlyCosts}
-                            setTimePeriodCost={setTimePeriodCost}
-                            setDepAmount={setDepAmount}
-                            setFixedTerm={setFixedTerm}
-                            setStampDutyCost={setStampDutyCost}
-                            stampDutyCost={stampDutyCost}
-                            fixedTerm={fixedTerm}
-                            depAmount={depAmount}
-                        />
-                    </div>
+                    <BuyForm 
+                        monthlyCosts={monthlyCosts}
+                        setMonthlyCosts={setMonthlyCosts}
+                        upFrontCosts={upFrontCosts}
+                        setUpFrontCosts={setUpFrontCosts}
+                        depAmount={depAmount}
+                        setDepAmount={setDepAmount}
+                        fixedTerm={fixedTerm}
+                        setFixedTerm={setFixedTerm}
+                        stampDutyCost={stampDutyCost}
+                        setStampDutyCost={setStampDutyCost}
+                        setTimePeriodCost={setTimePeriodCost}
+                    />
                 </div>
             </section>
         </>
