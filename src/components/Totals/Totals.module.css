@@ -10,8 +10,14 @@
     text-align: left;
 }
 
-.Totals p{
+.Totals h5{
+    text-align: left;
     margin: 0.5rem 0;
+}
+
+.Totals p{
+    margin: 0.2rem 0;
+    font-size: 0.8rem;
 }
 
 .colFlex{

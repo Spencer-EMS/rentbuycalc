@@ -1,0 +1,60 @@
+.BuyForm {
+    width: 38rem;
+}
+
+.BuyForm form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.BuyForm label {
+    width: 100%;
+}
+
+.BuyForm h3 {
+    width: 100%;
+    margin: 0.5rem;
+}
+
+.BuyForm input {
+    margin: 0.5rem;
+    width: 80%;
+}
+
+.flexNorm{
+    display: flex;
+    width: 100%;
+}
+
+.colFlex{
+    display: flex;
+    flex-direction: column;
+}
+
+.stampFlex {
+    display: flex;
+    width: 50%;
+    margin: auto;
+    vertical-align: middle;
+    /* text-align: center; */
+    justify-content: space-around;
+}
+
+.stampFlex p{
+    font-size: 0.8rem;
+    text-align: left;
+    margin: auto;
+}
+
+.stampFlex input{
+    width: 1rem !important;
+    height: 1rem !important;
+}
+
+.dropDown {
+    margin: 0.5rem;
+    width: 82%;
+    
+    padding: 1px 2px;
+}
