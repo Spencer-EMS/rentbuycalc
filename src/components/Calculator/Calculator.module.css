@@ -3,3 +3,24 @@
     justify-content: center;
 }
 
+.buyingFlex{
+    display: flex;
+    width: 36rem;
+    margin: 0rem 1rem;
+    justify-content: space-between;
+    cursor: pointer;
+    border-radius: 15px 50px;
+}
+
+.buyingFlex button{
+    all: unset;
+    
+}
+
+.buySection{
+    margin: 1rem 0;
+}
+
+.rentSection{
+    margin: 2rem 0;
+}

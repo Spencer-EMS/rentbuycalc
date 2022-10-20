@@ -189,7 +189,6 @@ const BuyForm = (props) => {
     return(
         <div className={style.BuyForm}>
             <form>
-                <h3>Buying</h3>
                 <h5>Purchase Property</h5>
                 <div className={style.flexNorm}>
                     <label htmlFor="pvalue">Property Value:

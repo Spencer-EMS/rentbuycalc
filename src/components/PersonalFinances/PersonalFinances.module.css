@@ -1,0 +1,16 @@
+.PersonalFinances{
+    margin: 2rem auto;
+}
+
+
+.financeFlex{
+    display: flex;
+    justify-content: space-around;
+}
+
+.colFlex {
+    display: flex;
+    flex-direction: column;
+    width: 15.5rem;
+    margin: 0 0.5rem;
+}

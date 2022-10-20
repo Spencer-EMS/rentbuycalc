@@ -6,12 +6,10 @@ const BuyInput = () => {
         <div className={style.Rent}>
                 <h3>Rent</h3>
                 <div className={style.flexNorm}>
-                    <label htmlFor="pvalue">Monthly rent (pcm):
+                    <p>Monthly rent (pcm):</p>
                         <input type="number" id="pvalue" name="pvalue" defaultValue="0"/>
-                    </label>
-                    <label htmlFor="rinc">Annual rent increase:
+                    <p>Annual rent increase:</p>
                         <input id="rinc" name="rinc" defaultValue="2.5%"/>
-                    </label>
                 </div>
         </div>
     );
