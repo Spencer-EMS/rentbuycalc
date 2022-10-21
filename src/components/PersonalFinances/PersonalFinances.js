@@ -3,7 +3,6 @@ import style from './PersonalFinances.module.css';
 
 const PersonalFinances = (props) => {
 
-
     // Event handlers
     const handleIncomeChange = (event) => {
         const income = event.target.value;
@@ -21,11 +20,11 @@ const PersonalFinances = (props) => {
             <div className={style.financeFlex}>
                 <div className={style.colFlex}>
                     <p>Annual Salary:</p>
-                    <input type="number" id="asalary" name="asalary" defaultValue="25000" onChange={handleIncomeChange}/>
+                    <input type="number" id="asalary" name="asalary" defaultValue={props.annualIncome} onChange={handleIncomeChange}/>
                 </div>
                 <div className={style.colFlex}>
-                    <p>Savings:</p>
-                    <input type="number" id="csavings" name="csavings" defaultValue="7000" onChange={handleSavingsChange}/>
+                    <p>Current Savings:</p>
+                    <input type="number" id="csavings" name="csavings" defaultValue={props.currentSavings} onChange={handleSavingsChange}/>
                 </div>
             </div>
         </div>

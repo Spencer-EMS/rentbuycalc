@@ -5,6 +5,7 @@ const BuyForm = (props) => {
 
     // input variables 
     const [ propValue, setPropValue ] = useState(250000);
+    const [ growthRate, setGrowthRate ] = useState(3);
     const [ depPercent, setDepPercent ] = useState(10);
     const [ mortTerm, setMortTerm ] = useState(25);
     const [ intRate, setIntRate ] = useState(6.25);
@@ -100,6 +101,11 @@ const BuyForm = (props) => {
         setPropValue(newPropValue);
     }
 
+    const handleGrowthRateChange = event => {
+        const annualRate = parseFloat(event.target.value);
+        setGrowthRate(annualRate);
+    }
+
     const handleCheckChange = () => { 
         setFtbCheckBox(!ftbCheckBox);
     }
@@ -118,10 +124,10 @@ const BuyForm = (props) => {
         setDepPercent(newDepPerc);
     }
 
-    const handleFtermChange = (event) => {
-        const newFixedTerm = parseInt(event.target.value);
-        props.setFixedTerm(newFixedTerm);
-    }
+    // const handleFtermChange = (event) => {
+    //     const newFixedTerm = parseInt(event.target.value);
+    //     props.setFixedTerm(newFixedTerm);
+    // }
 
     const handleMortTermChange = (event) => {
         const newMortTerm = parseInt(event.target.value);
@@ -129,7 +135,7 @@ const BuyForm = (props) => {
     }
 
     const handleIntChange = (event) => {
-        const newIntRate = parseInt(event.target.value);
+        const newIntRate = parseFloat(event.target.value);
         setIntRate(newIntRate);
     }
 
@@ -194,7 +200,10 @@ const BuyForm = (props) => {
                     <label htmlFor="pvalue">Property Value:
                         <input type="number" id="pvalue" name="pvalue" defaultValue={propValue} onChange={handlePropValue}/>
                     </label>
-                    <label htmlFor="fterm">Fixed term:
+                    <label htmlFor="pGrowth">Annual growth rate (%):
+                        <input type="number" id="pGrowth" name="pGrowth" defaultValue={growthRate} onChange={handleGrowthRateChange}/>
+                    </label>
+                    {/* <label htmlFor="fterm">Fixed term:
                         <select id="fterm" name="fterm" defaultValue={props.fixedTerm} onChange={handleFtermChange} className={style.dropDown}> 
                             <option type="number" value="1">1 Year</option>
                             <option type="number" value="2">2 Years</option>
@@ -202,7 +211,7 @@ const BuyForm = (props) => {
                             <option type="number" value="4">4 Years</option>
                             <option type="number" value="5">5 Years</option>
                         </select>
-                    </label>
+                    </label> */}
                 </div>
                 <h5>Upfront costs</h5>
                 <div className={style.flexNorm}>

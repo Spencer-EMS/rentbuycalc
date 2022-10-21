@@ -8,16 +8,21 @@ import RentInput from '../RentInput/RentInput';
 
 const Calculator = () => {
 
-    // input variables 
-    const [ fixedTerm, setFixedTerm ] = useState(0);
+    // input variables BUY
+    const [ fixedTerm, setFixedTerm ] = useState(2);
+
+    // input variables Rent
+    const [ rentMonthlyCost, setRentMonthlyCost ] = useState(0);
+    
 
     // Personal Finances
-    const [ annualIncome, setAnnualIncome ] = useState(0);
+    const [ annualIncome, setAnnualIncome ] = useState(25000);
+    const [ currentSavings, setCurrentSavings ] = useState(2000);
 
-    // upfront cost variables
+    // upfront cost variables BUY
     const [ stampDutyCost, setStampDutyCost ] = useState(0); 
 
-    // readOnly values
+    // readOnly values BUY
     const [ depAmount, setDepAmount ] = useState(0);
     
     // Totals
@@ -45,24 +50,28 @@ const Calculator = () => {
                 <Totals 
                     depositAmount={depAmount} 
                     stampDuty={stampDutyCost}
-                    fixedT={fixedTerm}
+                    fixedTerm={fixedTerm}
+                    setFixedTerm={setFixedTerm}
                     sumUpFrontCosts={upFrontCosts}
                     sumMonthlyCosts={monthlyCosts}
                     buyTotalCost={timePeriodCost}
+                    currentSavings={currentSavings}
+                    rentMonthlyCost={rentMonthlyCost}
                 />
                 <div className={style.colFlex}>
                 <PersonalFinances 
                     annualIncome={annualIncome} 
                     setAnnualIncome={setAnnualIncome}
+                    currentSavings={currentSavings}
+                    setCurrentSavings={setCurrentSavings}
                 />
                 <div className={style.buySection}>
                     <button onClick={handleBuyButton}>
-                    <div  className={style.buyingFlex}>
+                    <div className={style.buyingFlex}>
                         <h3>Buying</h3>
-                        <p>V</p>
                     </div>
                     </button>
-                    {buyInputBool ? 
+                    {/* {buyInputBool ?  */}
                         <BuyForm 
                             monthlyCosts={monthlyCosts}
                             setMonthlyCosts={setMonthlyCosts}
@@ -76,25 +85,29 @@ const Calculator = () => {
                             setStampDutyCost={setStampDutyCost}
                             setTimePeriodCost={setTimePeriodCost}
                         />
-                    :
-                        <></>
-                    }
+                        {/* :
+                         <></>
+                    } */}
                 </div>
                 <div className={style.rentSection}>
                     <button onClick={handleRentButton}>
                         <div  className={style.buyingFlex}>
                             <h3>Renting</h3>
-                            <p>V</p>
                         </div>
                     </button>
-                    {rentInputButton ?
-                        <RentInput />
-                    :
+                    {/* {rentInputButton ? */}
+                        <RentInput 
+                            rentMonthlyCost={rentMonthlyCost}
+                            setRentMonthlyCost={setRentMonthlyCost}
+                            fixedTerm={fixedTerm}
+                        />
+                    {/* :
                         <></>
-                    }
-                </div>
+                    } */}
+                    </div>
                 </div>
             </section>
+            <section className={style.botSpacer}></section>
         </>
     );
 }

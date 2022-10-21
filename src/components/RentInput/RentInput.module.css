@@ -3,6 +3,12 @@
     margin: 3rem auto;
 }
 
+.flexNorm{
+    display: flex;
+    width: 100%;
+}
+
+
 .RentInput form{
     display: flex;
     flex-direction: column;
