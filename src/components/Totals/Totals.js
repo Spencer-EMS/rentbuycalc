@@ -40,7 +40,7 @@ const Totals = (props) => {
                 
                 <h4>Renting</h4>
                 <p>Upfront costs: £{props.upFrontRentCost}</p>
-                <p>Monthly costs: £{props.rentMonthlyCost}</p>
+                <p>Monthly costs: £{props.rentMonthlyCost.toFixed(0)}</p>
                 <h5>Total cost: £{props.upFrontRentCost+props.rentMonthlyCost}</h5>
                 <p>Security Deposit: £{props.securityDeposit.toFixed(0)}</p>
                 <p>Monthly Savings: £TBD</p>
