@@ -8,6 +8,10 @@
     width: 100%;
 }
 
+.adminFont{
+    margin-top: 0;
+}
+
 
 .RentInput form{
     display: flex;
@@ -57,4 +61,22 @@
     font-size: 0.8rem;
     width: 3rem;
     text-align: left;
+}
+
+.secDepFlex{
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.secDepFlex label{
+    width: 10rem;
+    margin: auto;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.secDepFlex input{
+    width: 12rem !important;
 }

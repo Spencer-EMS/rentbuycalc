@@ -39,10 +39,10 @@ const Totals = (props) => {
                 <h5>Fixed term total equity: £TBD</h5>
                 
                 <h4>Renting</h4>
-                <p>Upfront costs: £FEES :(</p>
+                <p>Upfront costs: £{props.upFrontRentCost}</p>
                 <p>Monthly costs: £{props.rentMonthlyCost}</p>
-                <h5>Fixed term total cost: £Lots :(</h5>
-                <p>Security Deposit: £TBD</p>
+                <h5>Total cost: £{props.upFrontRentCost+props.rentMonthlyCost}</h5>
+                <p>Security Deposit: £{props.securityDeposit.toFixed(0)}</p>
                 <p>Monthly Savings: £TBD</p>
                 <p>Savings returns: £x%?</p>
                 <h5>Fixed term total equity: £TBD</h5>

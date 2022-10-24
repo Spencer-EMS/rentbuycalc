@@ -11,10 +11,6 @@ const Calculator = () => {
     // input variables BUY
     const [ fixedTerm, setFixedTerm ] = useState(2);
 
-    // input variables Rent
-    const [ rentMonthlyCost, setRentMonthlyCost ] = useState(0);
-    
-
     // Personal Finances
     const [ annualIncome, setAnnualIncome ] = useState(25000);
     const [ currentSavings, setCurrentSavings ] = useState(2000);
@@ -24,11 +20,16 @@ const Calculator = () => {
 
     // readOnly values BUY
     const [ depAmount, setDepAmount ] = useState(0);
+
+    // readOnly values Rent
+    const [ securityDeposit, setSecurityDeposit ] = useState(0);
     
     // Totals
     const [ upFrontCosts, setUpFrontCosts ] = useState(0);
     const [ monthlyCosts, setMonthlyCosts ] = useState(0);
     const [ timePeriodCost, setTimePeriodCost ] = useState(0);
+    const [ upFrontRentCost, setUpFrontRentCost ] = useState(0);
+    const [ rentMonthlyCost, setRentMonthlyCost ] = useState(0);
 
     // Booleans
     const [ buyInputBool, setBuyInputBool ] = useState(false);
@@ -57,6 +58,8 @@ const Calculator = () => {
                     buyTotalCost={timePeriodCost}
                     currentSavings={currentSavings}
                     rentMonthlyCost={rentMonthlyCost}
+                    upFrontRentCost={upFrontRentCost}
+                    securityDeposit={securityDeposit}
                 />
                 <div className={style.colFlex}>
                 <PersonalFinances 
@@ -71,7 +74,7 @@ const Calculator = () => {
                         <h3>Buying</h3>
                     </div>
                     </button>
-                    {/* {buyInputBool ?  */}
+                    {buyInputBool ? 
                         <BuyForm 
                             monthlyCosts={monthlyCosts}
                             setMonthlyCosts={setMonthlyCosts}
@@ -85,9 +88,9 @@ const Calculator = () => {
                             setStampDutyCost={setStampDutyCost}
                             setTimePeriodCost={setTimePeriodCost}
                         />
-                        {/* :
-                         <></>
-                    } */}
+                        :
+                        <></>
+                    }
                 </div>
                 <div className={style.rentSection}>
                     <button onClick={handleRentButton}>
@@ -100,6 +103,10 @@ const Calculator = () => {
                             rentMonthlyCost={rentMonthlyCost}
                             setRentMonthlyCost={setRentMonthlyCost}
                             fixedTerm={fixedTerm}
+                            upFrontRentCost={upFrontRentCost}
+                            setUpFrontRentCost={setUpFrontRentCost}
+                            securityDeposit={securityDeposit}
+                            setSecurityDeposit={setSecurityDeposit}
                         />
                     {/* :
                         <></>
