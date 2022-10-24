@@ -74,7 +74,7 @@ const Calculator = () => {
                         <h3>Buying</h3>
                     </div>
                     </button>
-                    {buyInputBool ? 
+                    {/* {buyInputBool ?  */}
                         <BuyForm 
                             monthlyCosts={monthlyCosts}
                             setMonthlyCosts={setMonthlyCosts}
@@ -88,9 +88,9 @@ const Calculator = () => {
                             setStampDutyCost={setStampDutyCost}
                             setTimePeriodCost={setTimePeriodCost}
                         />
-                        :
-                        <></>
-                    }
+                    {/* //     :
+                    //     <></>
+                    // } */}
                 </div>
                 <div className={style.rentSection}>
                     <button onClick={handleRentButton}>
