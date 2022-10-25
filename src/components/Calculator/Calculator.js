@@ -12,8 +12,8 @@ const Calculator = () => {
     const [ fixedTerm, setFixedTerm ] = useState(2);
 
     // Personal Finances
-    const [ annualIncome, setAnnualIncome ] = useState(25000);
-    const [ currentSavings, setCurrentSavings ] = useState(2000);
+    const [ annualIncome, setAnnualIncome ] = useState(75000);
+    const [ currentSavings, setCurrentSavings ] = useState(30000);
 
     // upfront cost variables BUY
     const [ stampDutyCost, setStampDutyCost ] = useState(0); 
@@ -30,11 +30,13 @@ const Calculator = () => {
     const [ timePeriodCost, setTimePeriodCost ] = useState(0);
     const [ upFrontRentCost, setUpFrontRentCost ] = useState(0);
     const [ rentMonthlyCost, setRentMonthlyCost ] = useState(0);
+    const [ periodInterestCost, setPeriodInterestCost ] = useState(0);
+    const [ capitalGains, setCapitalGains ] = useState(0);
+    const [ capitalRepaid, setCapitalRepaid ] = useState(0);
 
     // Booleans
     const [ buyInputBool, setBuyInputBool ] = useState(false);
     const [ rentInputButton, setRentInputButton ] = useState(false);
-
 
     // Event handlers
     const handleBuyButton = () => {
@@ -60,6 +62,8 @@ const Calculator = () => {
                     rentMonthlyCost={rentMonthlyCost}
                     upFrontRentCost={upFrontRentCost}
                     securityDeposit={securityDeposit}
+                    periodInterestCost={periodInterestCost}
+                    capitalGains={capitalGains}
                 />
                 <div className={style.colFlex}>
                 <PersonalFinances 
@@ -83,10 +87,11 @@ const Calculator = () => {
                             depAmount={depAmount}
                             setDepAmount={setDepAmount}
                             fixedTerm={fixedTerm}
-                            setFixedTerm={setFixedTerm}
                             stampDutyCost={stampDutyCost}
                             setStampDutyCost={setStampDutyCost}
+                            setPeriodInterestCost={setPeriodInterestCost}
                             setTimePeriodCost={setTimePeriodCost}
+                            setCapitalGains={setCapitalGains}
                         />
                     {/* //     :
                     //     <></>

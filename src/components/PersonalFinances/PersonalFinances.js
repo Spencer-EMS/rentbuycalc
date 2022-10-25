@@ -19,7 +19,7 @@ const PersonalFinances = (props) => {
             <h3>Your Finances</h3>
             <div className={style.financeFlex}>
                 <div className={style.colFlex}>
-                    <p>Annual Salary:</p>
+                    <p>Household Income:</p>
                     <input type="number" id="asalary" name="asalary" defaultValue={props.annualIncome} onChange={handleIncomeChange}/>
                 </div>
                 <div className={style.colFlex}>

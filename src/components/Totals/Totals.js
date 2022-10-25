@@ -8,7 +8,6 @@ const Totals = (props) => {
         props.setFixedTerm(newFixedTerm);
     }
 
-
     return(
         <div className={style.Totals}>
             <h3>Totals</h3>
@@ -27,21 +26,21 @@ const Totals = (props) => {
                 <h4>Buying</h4>
                 <p>Upfront costs: £{props.sumUpFrontCosts.toFixed(0)}</p>
                 <p>Monthly costs: £{props.sumMonthlyCosts.toFixed(0)}</p>
-                <p>Interest cost: £TBD</p>
-                <h5>Fixed term total cost: £{props.buyTotalCost.toFixed(0)}</h5>
+                <p>Interest cost: £{props.periodInterestCost.toFixed(0)}</p>
+                <h5>Sunk costs: £{props.buyTotalCost.toFixed(0)}</h5>
 
                 <p>Deposit: £{props.depositAmount.toFixed(0)}</p>
                 <p>Remaining Savings: £{(props.currentSavings-props.sumUpFrontCosts-props.depositAmount)}</p>
                 <p>Monthly Savings: £TBD</p>
                 <p>Savings returns: £x%?</p>
-                <p>Capital gain: £TBD</p>
+                <p>Capital gains: £{props.capitalGains.toFixed(0)}</p>
                 <p>Capital repaid: £TBD</p>
                 <h5>Fixed term total equity: £TBD</h5>
                 
                 <h4>Renting</h4>
                 <p>Upfront costs: £{props.upFrontRentCost}</p>
                 <p>Monthly costs: £{props.rentMonthlyCost.toFixed(0)}</p>
-                <h5>Total cost: £{props.upFrontRentCost+props.rentMonthlyCost}</h5>
+                <h5>Sunk costs: £{(props.upFrontRentCost+props.rentMonthlyCost).toFixed(0)}</h5>
                 <p>Security Deposit: £{props.securityDeposit.toFixed(0)}</p>
                 <p>Monthly Savings: £TBD</p>
                 <p>Savings returns: £x%?</p>

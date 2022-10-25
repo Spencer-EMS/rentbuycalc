@@ -1,14 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import style from './BuyForm.module.css';
 
-const BuyForm = (props) => {
+const BuyForm = ({
+        monthlyCosts,
+        setMonthlyCosts, 
+        upFrontCosts, 
+        setUpFrontCosts,
+        depAmount,
+        setDepAmount,
+        fixedTerm,
+        stampDutyCost,
+        setStampDutyCost,
+        setPeriodInterestCost,
+        setTimePeriodCost,
+        setCapitalGains
+    }) => {
 
     // input variables 
     const [ propValue, setPropValue ] = useState(250000);
     const [ growthRate, setGrowthRate ] = useState(3);
     const [ depPercent, setDepPercent ] = useState(10);
     const [ mortTerm, setMortTerm ] = useState(25);
-    const [ intRate, setIntRate ] = useState(6.25);
+    const [ intRate, setIntRate ] = useState(4.25);
 
     // readOnly values
     const [ mortPrinciple, setMortPrinciple ] = useState(0);
@@ -31,7 +44,7 @@ const BuyForm = (props) => {
     
     // Stamp Duty & Deposit
     useEffect(() => {
-        props.setDepAmount(propValue*(depPercent/100));
+        setDepAmount(propValue*(depPercent/100));
         var test1 = propValue-(propValue*(depPercent/100));
         setMortPrinciple(test1);
         const stampDuty = (value, ftbBool) => {
@@ -46,7 +59,7 @@ const BuyForm = (props) => {
                 } else {
                     sdltTotal = ((value - 1499999)*0.12)+((value - 925001)*0.1)+(675000*0.05);
                 }
-                props.setStampDutyCost(sdltTotal);
+                setStampDutyCost(sdltTotal);
             } else if (ftbBool === true) {
                 if (value <= 425000) {
                     sdltTotal = 0;
@@ -59,12 +72,23 @@ const BuyForm = (props) => {
                 } else {
                     sdltTotal = ((value - 1499999)*0.12)+((value - 925001)*0.1)+(675000*0.05);
                 }
-                props.setStampDutyCost(sdltTotal);
+                setStampDutyCost(sdltTotal);
             }
         }
         stampDuty(propValue, ftbCheckBox);
-    }, [propValue, ftbCheckBox, depPercent, props]);
+    }, [propValue, ftbCheckBox, depPercent, setDepAmount, setStampDutyCost]);
 
+    // Calculating Interest Cost across the time period [Formula: A=(P(1+r/n)^nt)-P]
+    useEffect(() => { 
+        var intCost;
+        intCost = mortPrinciple*((1+((intRate/100)/12))**(12*fixedTerm));
+        intCost = intCost - mortPrinciple;
+        setPeriodInterestCost(intCost);
+        // Buy cost over fixed term
+        const termCost = fixedTerm*monthlyCosts;
+        const totalBuyCost = upFrontCosts+termCost+intCost;
+        setTimePeriodCost(totalBuyCost);
+    }, [setPeriodInterestCost, setTimePeriodCost, fixedTerm, upFrontCosts, monthlyCosts, mortPrinciple, intRate]);
 
     // Monthly Mortgage Payments
     useEffect(() => {
@@ -76,23 +100,23 @@ const BuyForm = (props) => {
     useEffect(() => { // upFront cost Sum
         var upfrontCostSum;
         if (addToMortgage !== false) {
-            upfrontCostSum = props.stampDutyCost + legalCost + survCost;
+            upfrontCostSum = stampDutyCost + legalCost + survCost;
         } else {
-            upfrontCostSum = props.stampDutyCost + legalCost + mortFee + survCost;
+            upfrontCostSum = stampDutyCost + legalCost + mortFee + survCost;
         }
-        props.setUpFrontCosts(upfrontCostSum);
-    }, [props, legalCost, mortFee, survCost, addToMortgage]);
+        setUpFrontCosts(upfrontCostSum);
+    }, [setUpFrontCosts, stampDutyCost, legalCost, mortFee, survCost, addToMortgage]);
 
     useEffect(() => { // Monthly cost sum
         const monthlyCostSum = mortgagePayment + monthlyMaintenance + servCharge + groundRent;
-        props.setMonthlyCosts(monthlyCostSum);
-    }, [mortgagePayment, monthlyMaintenance, servCharge, groundRent, props]);
+        setMonthlyCosts(monthlyCostSum);
+    }, [setMonthlyCosts, mortgagePayment, monthlyMaintenance, servCharge, groundRent]);
     
-    useEffect(() => { // Buy Cost over Fixed Term
-        const termCost = props.fixedTerm*props.monthlyCosts;
-        var totalBuyCost = props.upFrontCosts+termCost;
-        props.setTimePeriodCost(totalBuyCost);
-    }, [props]);
+    useEffect(() => { // Capital Gains
+        const futureMarketValue = propValue*((1+((growthRate/100)/12))**(12*fixedTerm));
+        const capGain = futureMarketValue - propValue;
+        setCapitalGains(capGain);
+    }, [fixedTerm, stampDutyCost, setCapitalGains, setMonthlyCosts, propValue, growthRate]);
 
 
     // Event handlers
@@ -113,12 +137,12 @@ const BuyForm = (props) => {
     const handleDepChange = event => { 
         const newDepPerc = parseInt(event.target.value);
         setDepPercent(newDepPerc);
-        props.setDepAmount((newDepPerc/100)*propValue);
+        setDepAmount((newDepPerc/100)*propValue);
     }
 
     const handleDepAmountChange = event => {
         var newDepAmount = parseInt(event.target.value);
-        props.setDepAmount(newDepAmount);
+        setDepAmount(newDepAmount);
         var newDepPerc = newDepAmount/propValue;
         newDepPerc = (newDepPerc*100).toFixed(1);
         setDepPercent(newDepPerc);
@@ -126,7 +150,7 @@ const BuyForm = (props) => {
 
     // const handleFtermChange = (event) => {
     //     const newFixedTerm = parseInt(event.target.value);
-    //     props.setFixedTerm(newFixedTerm);
+    //     .setFixedTerm(newFixedTerm);
     // }
 
     const handleMortTermChange = (event) => {
@@ -203,15 +227,31 @@ const BuyForm = (props) => {
                     <label htmlFor="pGrowth">Annual growth rate (%):
                         <input type="number" id="pGrowth" name="pGrowth" defaultValue={growthRate} onChange={handleGrowthRateChange}/>
                     </label>
-                    {/* <label htmlFor="fterm">Fixed term:
-                        <select id="fterm" name="fterm" defaultValue={props.fixedTerm} onChange={handleFtermChange} className={style.dropDown}> 
-                            <option type="number" value="1">1 Year</option>
-                            <option type="number" value="2">2 Years</option>
-                            <option type="number" value="3">3 Years</option>
-                            <option type="number" value="4">4 Years</option>
-                            <option type="number" value="5">5 Years</option>
-                        </select>
-                    </label> */}
+                </div>
+                <h5>Mortgage</h5>
+                {/* <div className={style.flexNorm}>
+                    <label htmlFor="propValueRef">Property Value:
+                        <input readOnly type="number" id="propValueRef" name="propValueRef" value={propValue}/>
+                    </label>
+                    <label htmlFor="princ">Principle:
+                        <input readOnly type="number" id="princ" name="princ" value={mortPrinciple}/>
+                    </label>
+                </div> */}
+                <div className={style.flexNorm}>
+                    <label htmlFor="dperc">Deposit %:
+                        <input type="number" id="dperc" name="dperc" value={depPercent} onChange={handleDepChange}/>
+                    </label>
+                    <label htmlFor="dvalue">Deposit:
+                        <input type="number" id="deposit" name="deposit" value={depAmount} onChange={handleDepAmountChange}/>
+                    </label>
+                </div>
+                <div className={style.flexNorm}>
+                    <label htmlFor="dperc">Mortgage term:
+                        <input type="number" id="dperc" name="dperc" defaultValue={mortTerm} onChange={handleMortTermChange}/>
+                    </label>
+                    <label htmlFor="irate">Interest rate:
+                        <input type="number" id="irate" name="irate" defaultValue={intRate} onChange={handleIntChange}/>
+                    </label>
                 </div>
                 <h5>Upfront costs</h5>
                 <div className={style.flexNorm}>
@@ -220,7 +260,7 @@ const BuyForm = (props) => {
                             <p>First time buyer?</p>
                             <input type="checkbox" id="ftbCheck" name="ftbCheck" onChange={handleCheckChange} defaultValue={ftbCheckBox}/>
                         </div>
-                        <input type="number" id="lcost" name="lcost" readOnly value={props.stampDutyCost.toFixed(0)}/>
+                        <input type="number" id="lcost" name="lcost" readOnly value={stampDutyCost.toFixed(0)}/>
                     </label>
                     <label htmlFor="mortgageFees">Mortgage fee:
                         <div className={style.stampFlex}>
@@ -238,35 +278,10 @@ const BuyForm = (props) => {
                         <input type="number" id="scost" name="scost" defaultValue={survCost} onChange={handleSurvCostChange}/>
                     </label>
                 </div>
-                <h5>Mortgage</h5>
-                <div className={style.flexNorm}>
-                    <label htmlFor="propValueRef">Property Value:
-                        <input readOnly type="number" id="propValueRef" name="propValueRef" value={propValue}/>
-                    </label>
-                    <label htmlFor="princ">Principle:
-                        <input readOnly type="number" id="princ" name="princ" value={mortPrinciple}/>
-                    </label>
-                </div>
-                <div className={style.flexNorm}>
-                    <label htmlFor="dperc">Deposit %:
-                        <input type="number" id="dperc" name="dperc" value={depPercent} onChange={handleDepChange}/>
-                    </label>
-                    <label htmlFor="dvalue">Deposit:
-                        <input type="number" id="deposit" name="deposit" value={props.depAmount} onChange={handleDepAmountChange}/>
-                    </label>
-                </div>
-                <div className={style.flexNorm}>
-                    <label htmlFor="dperc">Mortgage term:
-                        <input type="number" id="dperc" name="dperc" defaultValue={mortTerm} onChange={handleMortTermChange}/>
-                    </label>
-                    <label htmlFor="irate">Interest rate:
-                        <input type="number" id="irate" name="irate" defaultValue={intRate} onChange={handleIntChange}/>
-                    </label>
-                </div>
                 <h5>Monthly costs</h5>
                 <div className={style.flexNorm}>
                     <label htmlFor="mPayment">Mortgage Payment:
-                        <input readOnly type="number" id="mPayment" name="mPayment" value={mortgagePayment.toFixed(2)}/>
+                        <input readOnly type="number" id="mPayment" name="mPayment" value={mortgagePayment.toFixed(0)}/>
                     </label>
                     <label htmlFor="grent">Maintenance:
                         <input type="number" id="grent" name="grent" defaultValue={monthlyMaintenance} onChange={handleMaintenanceChange}/>
