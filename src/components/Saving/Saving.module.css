@@ -1,3 +1,19 @@
 .Saving{
-    background-color: blueviolet;
+    width: 38rem;
+    margin: auto;
+}
+
+.Saving p{
+    font-size: 0.8rem;
+}
+
+
+.flexNorm{
+    display: flex;
+    width: 100%;
+}
+
+.Saving input {
+    margin: 1rem;
+    width: 80%;
 }

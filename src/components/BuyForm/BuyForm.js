@@ -117,8 +117,11 @@ const BuyForm = ({
 
     // Capital repaid
     useEffect(() => {
-        const TotalMonthlyPayments = mortgagePayment*(fixedTerm*12);
-        const capRepaid = TotalMonthlyPayments - periodInterestCost;
+        const totalMonthlyPayments = mortgagePayment*(fixedTerm*12);
+        const capRepaid = totalMonthlyPayments - periodInterestCost;
+        // console.log("capRepaid", capRepaid);
+        // console.log("totalMonthlyPayments", totalMonthlyPayments);
+        // console.log("periodInterestCost", periodInterestCost);
         setCapitalRepaid(capRepaid);
     }, [mortgagePayment, periodInterestCost, fixedTerm, setCapitalRepaid]);
     

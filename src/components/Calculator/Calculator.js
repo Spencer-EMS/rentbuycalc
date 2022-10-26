@@ -37,6 +37,11 @@ const Calculator = () => {
     // RENT
     const [ upFrontRentCost, setUpFrontRentCost ] = useState(0);
     const [ rentMonthlyCost, setRentMonthlyCost ] = useState(0);
+
+    // SAVING
+    const [ saveBuy, setSaveBuy ] = useState(0);
+    const [ saveRent, setSaveRent ] = useState(0);
+    const [ aer, setAer ] = useState(4.5);
     
     // Booleans
     const [ buyInputBool, setBuyInputBool ] = useState(false);
@@ -69,6 +74,8 @@ const Calculator = () => {
                     upFrontRentCost={upFrontRentCost}
                     securityDeposit={securityDeposit}
                     capitalRepaid={capitalRepaid}
+                    saveBuy={saveBuy}
+                    saveRent={saveRent}
                 />
                 <div className={style.colFlex}>
                 <PersonalFinances 
@@ -130,7 +137,16 @@ const Calculator = () => {
                                 <h3>Saving</h3>
                             </div>
                         </button>
-                        <Saving />
+                        <Saving
+                            saveBuy={saveBuy}
+                            setSaveBuy={setSaveBuy}
+                            saveRent={saveRent}
+                            setSaveRent={setSaveRent}
+                            rentMonthlyCost={rentMonthlyCost}
+                            monthlyCosts={monthlyCosts}
+                            aer={aer}
+                            setAer={setAer}
+                        />
                     </div>
                 </div> 
             </section>

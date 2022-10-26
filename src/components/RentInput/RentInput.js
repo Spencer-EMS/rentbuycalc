@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import style from './RentInput.module.css';
 
-const RentInput = (props) => {
+const RentInput = ({
+    rentMonthlyCost,
+    setRentMonthlyCost,
+    fixedTerm,
+    upFrontRentCost,
+    setUpFrontRentCost,
+    securityDeposit,
+    setSecurityDeposit
+}) => {
 
     const [ refCost, setRefCost ] = useState(((1*199)*1.2).toFixed(2));
     const [ adminCost, setAdminCost ] = useState(240);
@@ -9,20 +17,32 @@ const RentInput = (props) => {
     const [ rentIncrease, setRentIncrease ] = useState(4);
     const [ depWeeks, setDepWeeks ] = useState(4);
     const [ rentServiceCharge, setRentServiceCharge ] = useState(0);
-    const [ rentGroundRent, setRentGroundRent ] = useState(0);
 
     useEffect(() => {
         var rate = (rentIncrease/100)+1;
-        var annualCost = (rent*12)*(rate**(props.fixedTerm-1));
-        annualCost = annualCost + ((rentServiceCharge*12)+(rentGroundRent*12));
-        var totalMonthlyCosts = annualCost*props.fixedTerm;
-        props.setRentMonthlyCost(totalMonthlyCosts);
-        var initialCost = parseInt(adminCost)+parseInt(refCost)+parseInt(props.securityDeposit); // ADD SEC DEPOSIT
-        props.setUpFrontRentCost(initialCost);
+        var annualCost = (rent*12)*(rate**(fixedTerm-1));
+        annualCost = annualCost + ((rentServiceCharge*12));
+        var totalMonthlyCosts = annualCost * fixedTerm;
+        setRentMonthlyCost(totalMonthlyCosts);
+        var initialCost = parseInt(adminCost)+parseInt(refCost)+parseInt(securityDeposit);
+        setUpFrontRentCost(initialCost);
         const weeklyRent = (rent*12)/52;
         const secDeposit = weeklyRent*depWeeks;
-        props.setSecurityDeposit(secDeposit);
-    }, [props, rent, rentIncrease, adminCost, refCost, depWeeks, rentGroundRent, rentServiceCharge]);
+        setSecurityDeposit(secDeposit);
+    }, [
+        rent, 
+        rentIncrease, 
+        adminCost, 
+        refCost, 
+        depWeeks,
+        rentServiceCharge,
+        setRentMonthlyCost,
+        setUpFrontRentCost,
+        setSecurityDeposit,
+        fixedTerm,
+        securityDeposit
+       ]
+    );
 
     const handleRentChange = event => {
         const monthlyRent = parseInt(event.target.value);
@@ -54,10 +74,10 @@ const RentInput = (props) => {
         setRentServiceCharge(servCharge);
     }
 
-    const handleRentGroundChange = event => {
-        const groundRent = event.target.value;
-        setRentGroundRent(groundRent);
-    }
+    // const handleRentGroundChange = event => {
+    //     const groundRent = event.target.value;
+    //     setRentGroundRent(groundRent);
+    // }
     
     return(
         <div className={style.RentInput}>
@@ -96,7 +116,7 @@ const RentInput = (props) => {
                             <option type="number" value="5">5 weeks</option>
                         </select>
                     </label>
-                    <input readOnly type="number" id="secDep" value={props.securityDeposit.toFixed(0)} className={style.refInput}/>
+                    <input readOnly type="number" id="secDep" value={securityDeposit.toFixed(0)} className={style.refInput}/>
                 </div>
                 <h5>Monthly costs</h5>
                 <div className={style.flexNorm}>
@@ -104,7 +124,7 @@ const RentInput = (props) => {
                         <input type="number" id="renserv" name="renserv" defaultValue={rentServiceCharge} onChange={handleRentServiceChange}/>
                     </label>
                     <label htmlFor="rentGrou">Ground rent:
-                        <input type="number" id="rentGrou" name="rentGrou" defaultValue={rentGroundRent} onChange={handleRentGroundChange}/>
+                        <input id="rentGrou" name="rentGrou" value={"Peppercorn"} readOnly/>
                     </label>
                 </div>
             </form>

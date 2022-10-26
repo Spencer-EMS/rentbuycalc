@@ -14,7 +14,9 @@ const Totals = ({
         rentMonthlyCost,
         upFrontRentCost,
         securityDeposit,
-        capitalRepaid
+        capitalRepaid, 
+        saveBuy,
+        saveRent
     }) => {
 
     const handleFtermChange = (event) => {
@@ -45,10 +47,10 @@ const Totals = ({
 
                 <p>Deposit: £{depositAmount.toFixed(0)}</p>
                 <p>Remaining Savings: £{(currentSavings - sumUpFrontCosts - depositAmount)}</p>
-                <p>Savings: £x?</p>
+                <p>Savings: £{(saveBuy*(fixedTerm*12)).toFixed(0)}</p>
                 <p>Capital gains: £{capitalGains.toFixed(0)}</p>
                 <p>Capital repaid: £{capitalRepaid.toFixed(0)}</p>
-                <h5>Equity: £TBD</h5>
+                <h5>Equity: £{(depositAmount + (currentSavings - sumUpFrontCosts - depositAmount) + (saveBuy*(fixedTerm*12)) + capitalGains + capitalRepaid).toFixed(0)}</h5>
                 
                 <h4>Renting</h4>
                 <p>Upfront costs: £{upFrontRentCost}</p>
@@ -56,8 +58,8 @@ const Totals = ({
                 <h5>Sunk costs: £{(upFrontRentCost + rentMonthlyCost).toFixed(0)}</h5>
                 <p>Security Deposit: £{securityDeposit.toFixed(0)}</p>
                 <p>Remaining Savings: £{(currentSavings - upFrontRentCost - securityDeposit).toFixed(0)}</p>
-                <p>Savings returns: £x%?</p>
-                <h5>Equity: £TBD</h5>
+                <p>Savings: £{(saveRent*(fixedTerm*12)).toFixed(0)}</p>
+                <h5>Equity: £{((securityDeposit) + (currentSavings - upFrontRentCost - securityDeposit) + (saveRent*(fixedTerm*12))).toFixed(0)}</h5>
             </div>
         </div>
     );
