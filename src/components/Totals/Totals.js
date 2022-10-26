@@ -4,7 +4,6 @@ import style from './Totals.module.css';
 const Totals = ({
         currentSavings,
         depositAmount,
-        stampDuty,
         fixedTerm,
         setFixedTerm,
         sumUpFrontCosts,
@@ -56,9 +55,9 @@ const Totals = ({
                 <p>Monthly costs: £{rentMonthlyCost.toFixed(0)}</p>
                 <h5>Sunk costs: £{(upFrontRentCost + rentMonthlyCost).toFixed(0)}</h5>
                 <p>Security Deposit: £{securityDeposit.toFixed(0)}</p>
-                <p>Monthly Savings: £TBD</p>
+                <p>Remaining Savings: £{(currentSavings - upFrontRentCost - securityDeposit).toFixed(0)}</p>
                 <p>Savings returns: £x%?</p>
-                <h5>Fixed term total equity: £TBD</h5>
+                <h5>Equity: £TBD</h5>
             </div>
         </div>
     );

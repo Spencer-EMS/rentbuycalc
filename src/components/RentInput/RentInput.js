@@ -85,21 +85,19 @@ const RentInput = (props) => {
                     <input type="number" id="afees" defaultValue={adminCost} className={style.refInput} onChange={handleAdminChange}/>
                     </label>
                 </div>
-                <label htmlFor="secDep">
-                    <p>Security Deposit:</p>
-                    <div className={style.secDepFlex}>
-                        <label htmlFor="fterm">Weeks:
-                            <select id="fterm" name="fterm" defaultValue={depWeeks} onChange={handleDepWeekChange} className={style.dropDown}> 
-                                <option type="number" value="1">1 weeks</option>
-                                <option type="number" value="2">2 weeks</option>
-                                <option type="number" value="3">3 weeks</option>
-                                <option type="number" value="4">4 weeks</option>
-                                <option type="number" value="5">5 weeks</option>
-                            </select>
-                        </label>
-                        <input readOnly type="number" id="secDep" value={props.securityDeposit.toFixed(0)} className={style.refInput}/>
-                    </div>
-                </label>
+                <p>Security Deposit:</p>
+                <div className={style.secDepFlex}>
+                    <label htmlFor="fterm">Weeks:
+                        <select id="fterm" name="fterm" defaultValue={depWeeks} onChange={handleDepWeekChange} className={style.dropDown}> 
+                            <option type="number" value="1">1 weeks</option>
+                            <option type="number" value="2">2 weeks</option>
+                            <option type="number" value="3">3 weeks</option>
+                            <option type="number" value="4">4 weeks</option>
+                            <option type="number" value="5">5 weeks</option>
+                        </select>
+                    </label>
+                    <input readOnly type="number" id="secDep" value={props.securityDeposit.toFixed(0)} className={style.refInput}/>
+                </div>
                 <h5>Monthly costs</h5>
                 <div className={style.flexNorm}>
                     <label htmlFor="renserv">Service charge:
