@@ -27,6 +27,16 @@
     width: 100%;
 }
 
+.flexNorm p{
+    /* all: unset; */
+    font-size: 0.8rem;
+}
+
+.flexNorm input {
+    margin: 0.5rem;
+    width: 80%;
+}
+
 .colFlex{
     display: flex;
     flex-direction: column;

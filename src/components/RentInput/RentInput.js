@@ -63,7 +63,7 @@ const RentInput = (props) => {
         <div className={style.RentInput}>
             <form>
                 <div className={style.Rent}>
-                    <h3>Rent</h3>
+                    <h5>Rental Property</h5>
                     <div className={style.flexNorm}>
                         <p>Monthly rent (pcm):</p>
                         <input type="number" id="pvalue" name="pvalue" defaultValue={rent} onChange={handleRentChange}/>
@@ -71,7 +71,7 @@ const RentInput = (props) => {
                         <input type="number" id="rinc" name="rinc" defaultValue={rentIncrease} onChange={handleRentIncreaseChange}/>
                     </div>
                 </div>
-                <h3>Upfront costs</h3>
+                <h5>Upfront costs</h5>
                 <div className={style.flexNorm}>
                     <label htmlFor="mfees">Referencing: 
                         <div className={style.refFlex}>
@@ -100,7 +100,7 @@ const RentInput = (props) => {
                         <input readOnly type="number" id="secDep" value={props.securityDeposit.toFixed(0)} className={style.refInput}/>
                     </div>
                 </label>
-                <h3>Monthly costs</h3>
+                <h5>Monthly costs</h5>
                 <div className={style.flexNorm}>
                     <label htmlFor="renserv">Service charge:
                         <input type="number" id="renserv" name="renserv" defaultValue={rentServiceCharge} onChange={handleRentServiceChange}/>

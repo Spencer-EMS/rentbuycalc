@@ -5,10 +5,11 @@ import Totals from '../Totals/Totals';
 import PersonalFinances from '../PersonalFinances/PersonalFinances';
 import BuyForm from '../BuyForm/BuyForm';
 import RentInput from '../RentInput/RentInput';
+import Saving from '../Saving/Saving';
 
 const Calculator = () => {
 
-    // input variables BUY
+    // time period
     const [ fixedTerm, setFixedTerm ] = useState(2);
 
     // Personal Finances
@@ -25,15 +26,18 @@ const Calculator = () => {
     const [ securityDeposit, setSecurityDeposit ] = useState(0);
     
     // Totals
+
+    // BUY
     const [ upFrontCosts, setUpFrontCosts ] = useState(0);
     const [ monthlyCosts, setMonthlyCosts ] = useState(0);
     const [ timePeriodCost, setTimePeriodCost ] = useState(0);
-    const [ upFrontRentCost, setUpFrontRentCost ] = useState(0);
-    const [ rentMonthlyCost, setRentMonthlyCost ] = useState(0);
     const [ periodInterestCost, setPeriodInterestCost ] = useState(0);
     const [ capitalGains, setCapitalGains ] = useState(0);
     const [ capitalRepaid, setCapitalRepaid ] = useState(0);
-
+    // RENT
+    const [ upFrontRentCost, setUpFrontRentCost ] = useState(0);
+    const [ rentMonthlyCost, setRentMonthlyCost ] = useState(0);
+    
     // Booleans
     const [ buyInputBool, setBuyInputBool ] = useState(false);
     const [ rentInputButton, setRentInputButton ] = useState(false);
@@ -51,6 +55,7 @@ const Calculator = () => {
         <>
             <section className={style.Calculator}>
                 <Totals 
+                    currentSavings={currentSavings}
                     depositAmount={depAmount} 
                     stampDuty={stampDutyCost}
                     fixedTerm={fixedTerm}
@@ -58,12 +63,12 @@ const Calculator = () => {
                     sumUpFrontCosts={upFrontCosts}
                     sumMonthlyCosts={monthlyCosts}
                     buyTotalCost={timePeriodCost}
-                    currentSavings={currentSavings}
+                    periodInterestCost={periodInterestCost}
+                    capitalGains={capitalGains}
                     rentMonthlyCost={rentMonthlyCost}
                     upFrontRentCost={upFrontRentCost}
                     securityDeposit={securityDeposit}
-                    periodInterestCost={periodInterestCost}
-                    capitalGains={capitalGains}
+                    capitalRepaid={capitalRepaid}
                 />
                 <div className={style.colFlex}>
                 <PersonalFinances 
@@ -92,6 +97,8 @@ const Calculator = () => {
                             setPeriodInterestCost={setPeriodInterestCost}
                             setTimePeriodCost={setTimePeriodCost}
                             setCapitalGains={setCapitalGains}
+                            periodInterestCost={periodInterestCost}
+                            setCapitalRepaid={setCapitalRepaid}
                         />
                     {/* //     :
                     //     <></>
@@ -117,7 +124,15 @@ const Calculator = () => {
                         <></>
                     } */}
                     </div>
-                </div>
+                    <div>
+                        <button>
+                            <div  className={style.buyingFlex}>
+                                <h3>Saving</h3>
+                            </div>
+                        </button>
+                        <Saving />
+                    </div>
+                </div> 
             </section>
             <section className={style.botSpacer}></section>
         </>

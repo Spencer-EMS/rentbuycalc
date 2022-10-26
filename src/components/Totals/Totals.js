@@ -1,19 +1,34 @@
 import React from 'react';
 import style from './Totals.module.css';
 
-const Totals = (props) => {
+const Totals = ({
+        currentSavings,
+        depositAmount,
+        stampDuty,
+        fixedTerm,
+        setFixedTerm,
+        sumUpFrontCosts,
+        sumMonthlyCosts,
+        buyTotalCost,
+        periodInterestCost,
+        capitalGains,
+        rentMonthlyCost,
+        upFrontRentCost,
+        securityDeposit,
+        capitalRepaid
+    }) => {
 
     const handleFtermChange = (event) => {
         const newFixedTerm = parseInt(event.target.value);
-        props.setFixedTerm(newFixedTerm);
-    }
+        setFixedTerm(newFixedTerm);
+    }   
 
     return(
         <div className={style.Totals}>
             <h3>Totals</h3>
             <div className={style.colFlex}>
                 <label htmlFor="fterm">Time:
-                    <select id="fterm" name="fterm" defaultValue={props.fixedTerm} onChange={handleFtermChange} className={style.dropDown}> 
+                    <select id="fterm" name="fterm" defaultValue={fixedTerm} onChange={handleFtermChange} className={style.dropDown}> 
                         <option type="number" value="1">1 Year</option>
                         <option type="number" value="2">2 Years</option>
                         <option type="number" value="3">3 Years</option>
@@ -24,24 +39,23 @@ const Totals = (props) => {
                     </select>
                 </label>
                 <h4>Buying</h4>
-                <p>Upfront costs: £{props.sumUpFrontCosts.toFixed(0)}</p>
-                <p>Monthly costs: £{props.sumMonthlyCosts.toFixed(0)}</p>
-                <p>Interest cost: £{props.periodInterestCost.toFixed(0)}</p>
-                <h5>Sunk costs: £{props.buyTotalCost.toFixed(0)}</h5>
+                <p>Upfront costs: £{sumUpFrontCosts.toFixed(0)}</p>
+                <p>Monthly costs: £{sumMonthlyCosts.toFixed(0)}</p>
+                <p>Interest cost: £{periodInterestCost.toFixed(0)}</p>
+                <h5>Sunk costs: £{buyTotalCost.toFixed(0)}</h5>
 
-                <p>Deposit: £{props.depositAmount.toFixed(0)}</p>
-                <p>Remaining Savings: £{(props.currentSavings-props.sumUpFrontCosts-props.depositAmount)}</p>
-                <p>Monthly Savings: £TBD</p>
-                <p>Savings returns: £x%?</p>
-                <p>Capital gains: £{props.capitalGains.toFixed(0)}</p>
-                <p>Capital repaid: £TBD</p>
-                <h5>Fixed term total equity: £TBD</h5>
+                <p>Deposit: £{depositAmount.toFixed(0)}</p>
+                <p>Remaining Savings: £{(currentSavings - sumUpFrontCosts - depositAmount)}</p>
+                <p>Savings: £x?</p>
+                <p>Capital gains: £{capitalGains.toFixed(0)}</p>
+                <p>Capital repaid: £{capitalRepaid.toFixed(0)}</p>
+                <h5>Equity: £TBD</h5>
                 
                 <h4>Renting</h4>
-                <p>Upfront costs: £{props.upFrontRentCost}</p>
-                <p>Monthly costs: £{props.rentMonthlyCost.toFixed(0)}</p>
-                <h5>Sunk costs: £{(props.upFrontRentCost+props.rentMonthlyCost).toFixed(0)}</h5>
-                <p>Security Deposit: £{props.securityDeposit.toFixed(0)}</p>
+                <p>Upfront costs: £{upFrontRentCost}</p>
+                <p>Monthly costs: £{rentMonthlyCost.toFixed(0)}</p>
+                <h5>Sunk costs: £{(upFrontRentCost + rentMonthlyCost).toFixed(0)}</h5>
+                <p>Security Deposit: £{securityDeposit.toFixed(0)}</p>
                 <p>Monthly Savings: £TBD</p>
                 <p>Savings returns: £x%?</p>
                 <h5>Fixed term total equity: £TBD</h5>

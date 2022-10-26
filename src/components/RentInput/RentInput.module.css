@@ -1,11 +1,16 @@
 .RentInput {
     width: 38rem;
-    margin: 3rem auto;
+    margin: auto;
 }
 
 .flexNorm{
     display: flex;
     width: 100%;
+}
+
+.flexNorm p{
+    /* all: unset; */
+    font-size: 0.8rem;
 }
 
 .adminFont{

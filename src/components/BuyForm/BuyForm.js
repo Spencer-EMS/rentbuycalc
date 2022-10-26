@@ -12,8 +12,10 @@ const BuyForm = ({
         stampDutyCost,
         setStampDutyCost,
         setPeriodInterestCost,
+        periodInterestCost,
         setTimePeriodCost,
-        setCapitalGains
+        setCapitalGains,
+        setCapitalRepaid
     }) => {
 
     // input variables 
@@ -107,10 +109,18 @@ const BuyForm = ({
         setUpFrontCosts(upfrontCostSum);
     }, [setUpFrontCosts, stampDutyCost, legalCost, mortFee, survCost, addToMortgage]);
 
-    useEffect(() => { // Monthly cost sum
+    // Monthly cost sum
+    useEffect(() => { 
         const monthlyCostSum = mortgagePayment + monthlyMaintenance + servCharge + groundRent;
         setMonthlyCosts(monthlyCostSum);
     }, [setMonthlyCosts, mortgagePayment, monthlyMaintenance, servCharge, groundRent]);
+
+    // Capital repaid
+    useEffect(() => {
+        const TotalMonthlyPayments = mortgagePayment*(fixedTerm*12);
+        const capRepaid = TotalMonthlyPayments - periodInterestCost;
+        setCapitalRepaid(capRepaid);
+    }, [mortgagePayment, periodInterestCost, fixedTerm, setCapitalRepaid]);
     
     useEffect(() => { // Capital Gains
         const futureMarketValue = propValue*((1+((growthRate/100)/12))**(12*fixedTerm));
@@ -221,12 +231,10 @@ const BuyForm = ({
             <form>
                 <h5>Purchase Property</h5>
                 <div className={style.flexNorm}>
-                    <label htmlFor="pvalue">Property Value:
-                        <input type="number" id="pvalue" name="pvalue" defaultValue={propValue} onChange={handlePropValue}/>
-                    </label>
-                    <label htmlFor="pGrowth">Annual growth rate (%):
-                        <input type="number" id="pGrowth" name="pGrowth" defaultValue={growthRate} onChange={handleGrowthRateChange}/>
-                    </label>
+                    <p>Property Value:</p>
+                    <input type="number" id="pvalue" name="pvalue" defaultValue={propValue} onChange={handlePropValue}/>
+                    <p>Annual growth rate (%):</p>
+                    <input type="number" id="pGrowth" name="pGrowth" defaultValue={growthRate} onChange={handleGrowthRateChange}/>
                 </div>
                 <h5>Mortgage</h5>
                 {/* <div className={style.flexNorm}>
