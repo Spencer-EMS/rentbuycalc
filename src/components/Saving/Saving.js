@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import style from './Saving.module.css';
 
 const Saving = ({
+    fixedTerm,
     saveBuy,
     setSaveBuy,
     saveRent,
@@ -14,32 +15,35 @@ const Saving = ({
 
     const [ monthlyDelta, setMonthlyDelta ] = useState(0);
 
-    // 
+    // Calculating monthly cost delta
     useEffect(() => {
-        const delta = (rentMonthlyCost/12) - monthlyCosts;
+        const delta = (rentMonthlyCost/(fixedTerm*12)) - monthlyCosts;
+        console.log(delta);
         if (delta > 0) {
             setMonthlyDelta(delta);
             setSaveBuy(delta);
+            setSaveRent(0);
         } else if ( delta === 0) {
             console.log("Buying === Renting", delta);
-        } else {
+            setSaveBuy(0);
+            setSaveRent(0);
+        } else if (delta < 0) {
             setMonthlyDelta((delta*(-1)));
             setSaveRent((delta*(-1)));
+            setSaveBuy(0);
         }
         
-    }, [ setMonthlyDelta, rentMonthlyCost, monthlyCosts, setSaveBuy, setSaveRent]);
+    }, [ fixedTerm, setMonthlyDelta, rentMonthlyCost, monthlyCosts, setSaveBuy, setSaveRent]);
 
     // Event handlers
     const handleSaveBuyChange = event => {
         const savedBuying = parseInt(event.target.value);
         setSaveBuy(savedBuying);
-        setSaveRent(0);
     }
 
     const handleSaveRentChange = event => {
         const savedRent = parseInt(event.target.value);
         setSaveRent(savedRent);
-        setSaveBuy(0);
     }
 
     const handleAerChange = event => {
@@ -50,7 +54,7 @@ const Saving = ({
     return(
         <div className={style.Saving}>
             <h5>Monthly saving</h5>
-            <p>Mortgage: £{monthlyCosts} || Rent: £{rentMonthlyCost/12}</p>
+            <p>Mortgage: £{monthlyCosts} || Rent: £{rentMonthlyCost/(fixedTerm*12)}</p>
             <p>the difference is £{monthlyDelta}</p>
             <p>How much will you be saving per month, whilst buying/renting?</p>
             <div className={style.flexNorm}>

@@ -240,14 +240,6 @@ const BuyForm = ({
                     <input type="number" id="pGrowth" name="pGrowth" defaultValue={growthRate} onChange={handleGrowthRateChange}/>
                 </div>
                 <h5>Mortgage</h5>
-                {/* <div className={style.flexNorm}>
-                    <label htmlFor="propValueRef">Property Value:
-                        <input readOnly type="number" id="propValueRef" name="propValueRef" value={propValue}/>
-                    </label>
-                    <label htmlFor="princ">Principle:
-                        <input readOnly type="number" id="princ" name="princ" value={mortPrinciple}/>
-                    </label>
-                </div> */}
                 <div className={style.flexNorm}>
                     <label htmlFor="dperc">Deposit %:
                         <input type="number" id="dperc" name="dperc" value={depPercent} onChange={handleDepChange}/>

@@ -18,11 +18,12 @@ const RentInput = ({
     const [ depWeeks, setDepWeeks ] = useState(4);
     const [ rentServiceCharge, setRentServiceCharge ] = useState(0);
 
-    useEffect(() => {
+    // Calculating total monthly cost for the time period - needs work** 
+    useEffect(() => { 
         var rate = (rentIncrease/100)+1;
         var annualCost = (rent*12)*(rate**(fixedTerm-1));
-        annualCost = annualCost + ((rentServiceCharge*12));
-        var totalMonthlyCosts = annualCost * fixedTerm;
+        annualCost = annualCost + (rentServiceCharge*12);
+        const totalMonthlyCosts = annualCost * fixedTerm;
         setRentMonthlyCost(totalMonthlyCosts);
         var initialCost = parseInt(adminCost)+parseInt(refCost)+parseInt(securityDeposit);
         setUpFrontRentCost(initialCost);
@@ -120,7 +121,7 @@ const RentInput = ({
                 </div>
                 <h5>Monthly costs</h5>
                 <div className={style.flexNorm}>
-                    <label htmlFor="renserv">Service charge:
+                    <label htmlFor="renserv">Service charge (pcm):
                         <input type="number" id="renserv" name="renserv" defaultValue={rentServiceCharge} onChange={handleRentServiceChange}/>
                     </label>
                     <label htmlFor="rentGrou">Ground rent:

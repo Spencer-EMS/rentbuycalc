@@ -41,7 +41,7 @@ const Calculator = () => {
     // SAVING
     const [ saveBuy, setSaveBuy ] = useState(0);
     const [ saveRent, setSaveRent ] = useState(0);
-    const [ aer, setAer ] = useState(4.5);
+    const [ aer, setAer ] = useState(4.5); // AER = ((1+r/n)**n)-1
     
     // Booleans
     const [ buyInputBool, setBuyInputBool ] = useState(false);
@@ -138,6 +138,7 @@ const Calculator = () => {
                             </div>
                         </button>
                         <Saving
+                            fixedTerm={fixedTerm}
                             saveBuy={saveBuy}
                             setSaveBuy={setSaveBuy}
                             saveRent={saveRent}
