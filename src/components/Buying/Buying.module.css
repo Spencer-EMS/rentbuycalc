@@ -1,23 +1,23 @@
-.BuyForm {
+.Buying {
     width: 38rem;
 }
 
-.BuyForm form{
+.Buying form{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.BuyForm label {
+.Buying label {
     width: 100%;
 }
 
-.BuyForm h3 {
+.Buying h3 {
     width: 100%;
     margin: 0.5rem;
 }
 
-.BuyForm input {
+.Buying input {
     margin: 0.5rem;
     width: 80%;
 }

@@ -50,6 +50,10 @@
     width: 2.5rem !important;
 }
 
+.adminInput{
+    width: 100%;
+}
+
 .flexNorm{
     display: flex;
     width: 100%;

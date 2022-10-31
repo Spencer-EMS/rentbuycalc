@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import style from './RentInput.module.css';
 
 const RentInput = ({
-    rentMonthlyCost,
     setRentMonthlyCost,
     fixedTerm,
-    upFrontRentCost,
     setUpFrontRentCost,
     securityDeposit,
     setSecurityDeposit
@@ -74,11 +72,6 @@ const RentInput = ({
         const servCharge = event.target.value;
         setRentServiceCharge(servCharge);
     }
-
-    // const handleRentGroundChange = event => {
-    //     const groundRent = event.target.value;
-    //     setRentGroundRent(groundRent);
-    // }
     
     return(
         <div className={style.RentInput}>
@@ -103,7 +96,7 @@ const RentInput = ({
                     </label>
                     <label htmlFor="afees">
                         <p className={style.adminFont}>Admin fees:</p>
-                    <input type="number" id="afees" defaultValue={adminCost} className={style.refInput} onChange={handleAdminChange}/>
+                    <input type="number" id="afees" defaultValue={adminCost} className={style.adminInput} onChange={handleAdminChange}/>
                     </label>
                 </div>
                 <p>Security Deposit:</p>

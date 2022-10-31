@@ -52,8 +52,8 @@ const Saving = ({
     return(
         <div className={style.Saving}>
             <h5>Monthly saving</h5>
-            <p>Mortgage: £{monthlyCosts} || Rent: £{rentMonthlyCost/(fixedTerm*12)}</p>
-            <p>the difference is £{monthlyDelta}</p>
+            <p>Mortgage: £{monthlyCosts} || Rent: £{(rentMonthlyCost/(fixedTerm*12)).toFixed(0)}</p>
+            <p>the difference is £{monthlyDelta.toFixed(0)}</p>
             <p>How much will you be saving per month, whilst buying/renting?</p>
             <div className={style.flexNorm}>
                 <p>Saving whilst buying (PCM):

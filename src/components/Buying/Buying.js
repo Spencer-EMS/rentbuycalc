@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import style from './BuyForm.module.css';
+import style from './Buying.module.css';
 
-const BuyForm = ({
+const Buying = ({
         monthlyCosts,
         setMonthlyCosts, 
         upFrontCosts, 
@@ -40,9 +40,8 @@ const BuyForm = ({
     const [ groundRent, setGroundRent ] = useState(0);
 
     // Booleans
-    const [ addToMortgage, setAddToMortgage ] = useState(false);
+    const [ addToMortgage, setAddToMortgage ] = useState(true);
     const [ ftbCheckBox, setFtbCheckBox ] = useState(false);
-
     
     // Stamp Duty & Deposit
     useEffect(() => {
@@ -111,17 +110,14 @@ const BuyForm = ({
 
     // Monthly cost sum
     useEffect(() => { 
-        const monthlyCostSum = mortgagePayment + monthlyMaintenance + servCharge + groundRent;
+        const monthlyCostSum = (monthlyMaintenance + servCharge + groundRent)*(fixedTerm*12);
         setMonthlyCosts(monthlyCostSum);
-    }, [setMonthlyCosts, mortgagePayment, monthlyMaintenance, servCharge, groundRent]);
+    }, [setMonthlyCosts, monthlyMaintenance, servCharge, groundRent, fixedTerm]);
 
     // Capital repaid
     useEffect(() => {
         const totalMonthlyPayments = mortgagePayment*(fixedTerm*12);
         const capRepaid = totalMonthlyPayments - periodInterestCost;
-        // console.log("capRepaid", capRepaid);
-        // console.log("totalMonthlyPayments", totalMonthlyPayments);
-        // console.log("periodInterestCost", periodInterestCost);
         setCapitalRepaid(capRepaid);
     }, [mortgagePayment, periodInterestCost, fixedTerm, setCapitalRepaid]);
     
@@ -129,7 +125,7 @@ const BuyForm = ({
         const futureMarketValue = propValue*((1+((growthRate/100)/12))**(12*fixedTerm));
         const capGain = futureMarketValue - propValue;
         setCapitalGains(capGain);
-    }, [fixedTerm, stampDutyCost, setCapitalGains, setMonthlyCosts, propValue, growthRate]);
+    }, [fixedTerm, stampDutyCost, setCapitalGains, propValue, growthRate]);
 
 
     // Event handlers
@@ -160,11 +156,6 @@ const BuyForm = ({
         newDepPerc = (newDepPerc*100).toFixed(1);
         setDepPercent(newDepPerc);
     }
-
-    // const handleFtermChange = (event) => {
-    //     const newFixedTerm = parseInt(event.target.value);
-    //     .setFixedTerm(newFixedTerm);
-    // }
 
     const handleMortTermChange = (event) => {
         const newMortTerm = parseInt(event.target.value);
@@ -230,7 +221,7 @@ const BuyForm = ({
 
 
     return(
-        <div className={style.BuyForm}>
+        <div className={style.Buying}>
             <form>
                 <h5>Purchase Property</h5>
                 <div className={style.flexNorm}>
@@ -268,7 +259,7 @@ const BuyForm = ({
                     <label htmlFor="mortgageFees">Mortgage fee:
                         <div className={style.stampFlex}>
                             <p>Add to mortgage</p>
-                            <input type="checkbox" id="mortFee" name="mortFee" onChange={handleAddToMortgage} defaultValue={addToMortgage}/>
+                            <input type="checkbox" id="mortFee" name="mortFee" onChange={handleAddToMortgage} checked={addToMortgage}/>
                         </div>
                         <input type="number" id="mfees" name="mfees" defaultValue={mortFee} onChange={handleMortFeeChange}/>
                     </label>
@@ -303,4 +294,4 @@ const BuyForm = ({
     );
 }
 
-export default BuyForm;
+export default Buying;
