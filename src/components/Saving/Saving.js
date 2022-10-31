@@ -18,22 +18,20 @@ const Saving = ({
     // Calculating monthly cost delta
     useEffect(() => {
         const delta = (rentMonthlyCost/(fixedTerm*12)) - monthlyCosts;
-        console.log(delta);
         if (delta > 0) {
             setMonthlyDelta(delta);
             setSaveBuy(delta);
             setSaveRent(0);
         } else if ( delta === 0) {
-            console.log("Buying === Renting", delta);
             setSaveBuy(0);
             setSaveRent(0);
         } else if (delta < 0) {
             setMonthlyDelta((delta*(-1)));
             setSaveRent((delta*(-1)));
             setSaveBuy(0);
-        }
-        
+        }   
     }, [ fixedTerm, setMonthlyDelta, rentMonthlyCost, monthlyCosts, setSaveBuy, setSaveRent]);
+
 
     // Event handlers
     const handleSaveBuyChange = event => {
@@ -65,11 +63,11 @@ const Saving = ({
                     <input type="number" id="saveRent" name="saveRent" value={saveRent} onChange={handleSaveRentChange}/>
                 </p>
             </div>
-            <div className={style.flexNorm}>
-                    <p>Saving rate:
-                        <input type="number" id="aer" name="aer" defaultValue={aer} onChange={handleAerChange}/>
-                    </p>
-                </div>
+            <div className={style.savingFlex}>
+                <p>Saving rate:
+                    <input type="number" id="aer" name="aer" defaultValue={aer} onChange={handleAerChange}/>
+                </p>
+            </div>
         </div>
     );
 }

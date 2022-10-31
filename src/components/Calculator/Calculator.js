@@ -34,14 +34,17 @@ const Calculator = () => {
     const [ periodInterestCost, setPeriodInterestCost ] = useState(0);
     const [ capitalGains, setCapitalGains ] = useState(0);
     const [ capitalRepaid, setCapitalRepaid ] = useState(0);
+
     // RENT
     const [ upFrontRentCost, setUpFrontRentCost ] = useState(0);
     const [ rentMonthlyCost, setRentMonthlyCost ] = useState(0);
+    const [ accruedSavingsRent, setAccruedSavingsRent ] = useState(0);
 
     // SAVING
     const [ saveBuy, setSaveBuy ] = useState(0);
     const [ saveRent, setSaveRent ] = useState(0);
-    const [ aer, setAer ] = useState(4.5); // AER = ((1+r/n)**n)-1
+    const [ aer, setAer ] = useState(4.5); 
+    const [ accruedSavingsBuy, setAccruedSavingsBuy ] = useState(0);
     
     // Booleans
     const [ buyInputBool, setBuyInputBool ] = useState(false);
@@ -76,6 +79,11 @@ const Calculator = () => {
                     capitalRepaid={capitalRepaid}
                     saveBuy={saveBuy}
                     saveRent={saveRent}
+                    aer={aer}
+                    accruedSavingsBuy={accruedSavingsBuy}
+                    setAccruedSavingsBuy={setAccruedSavingsBuy}
+                    accruedSavingsRent={accruedSavingsRent}
+                    setAccruedSavingsRent={setAccruedSavingsRent}
                 />
                 <div className={style.colFlex}>
                 <PersonalFinances 
