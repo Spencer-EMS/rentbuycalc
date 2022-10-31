@@ -3,7 +3,8 @@ import style from './Buying.module.css';
 
 const Buying = ({
         monthlyCosts,
-        setMonthlyCosts, 
+        setMonthlyCosts,
+        setBuyMonthlyCost, 
         upFrontCosts, 
         setUpFrontCosts,
         depAmount,
@@ -112,7 +113,8 @@ const Buying = ({
     useEffect(() => { 
         const monthlyCostSum = (monthlyMaintenance + servCharge + groundRent)*(fixedTerm*12);
         setMonthlyCosts(monthlyCostSum);
-    }, [setMonthlyCosts, monthlyMaintenance, servCharge, groundRent, fixedTerm]);
+        setBuyMonthlyCost(mortgagePayment + monthlyMaintenance + servCharge + groundRent);
+    }, [setMonthlyCosts, setBuyMonthlyCost, monthlyMaintenance, servCharge, groundRent, mortgagePayment, fixedTerm]);
 
     // Capital repaid
     useEffect(() => {

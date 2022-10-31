@@ -8,7 +8,7 @@ const Saving = ({
     saveRent,
     setSaveRent,
     rentMonthlyCost,
-    monthlyCosts,
+    buyMonthlyCost,
     aer,
     setAer
 }) => {
@@ -17,7 +17,7 @@ const Saving = ({
 
     // Calculating monthly cost delta
     useEffect(() => {
-        const delta = (rentMonthlyCost/(fixedTerm*12)) - monthlyCosts;
+        const delta = rentMonthlyCost - buyMonthlyCost;
         if (delta > 0) {
             setMonthlyDelta(delta);
             setSaveBuy(delta);
@@ -30,7 +30,7 @@ const Saving = ({
             setSaveRent((delta*(-1)));
             setSaveBuy(0);
         }   
-    }, [ fixedTerm, setMonthlyDelta, rentMonthlyCost, monthlyCosts, setSaveBuy, setSaveRent]);
+    }, [ fixedTerm, setMonthlyDelta, rentMonthlyCost, buyMonthlyCost, setSaveBuy, setSaveRent]);
 
 
     // Event handlers
@@ -52,7 +52,7 @@ const Saving = ({
     return(
         <div className={style.Saving}>
             <h5>Monthly saving</h5>
-            <p>Mortgage: £{monthlyCosts} || Rent: £{(rentMonthlyCost/(fixedTerm*12)).toFixed(0)}</p>
+            <p>Buying PCM: £{buyMonthlyCost} || Rent PCM: £{(rentMonthlyCost/(fixedTerm*12)).toFixed(0)}</p>
             <p>the difference is £{monthlyDelta.toFixed(0)}</p>
             <p>How much will you be saving per month, whilst buying/renting?</p>
             <div className={style.flexNorm}>
@@ -64,7 +64,7 @@ const Saving = ({
                 </p>
             </div>
             <div className={style.savingFlex}>
-                <p>Saving rate:
+                <p>Saving rate (%):
                     <input type="number" id="aer" name="aer" defaultValue={aer} onChange={handleAerChange}/>
                 </p>
             </div>

@@ -15,7 +15,7 @@ const Calculator = () => {
     // Current Savings/Equity
     const [ currentSavings, setCurrentSavings ] = useState(30000);
 
-    // upfront cost variables BUY
+    // Stamp Duty
     const [ stampDutyCost, setStampDutyCost ] = useState(0); 
 
     // readOnly values 
@@ -31,6 +31,7 @@ const Calculator = () => {
     const [ periodInterestCost, setPeriodInterestCost ] = useState(0);
     const [ capitalGains, setCapitalGains ] = useState(0);
     const [ capitalRepaid, setCapitalRepaid ] = useState(0);
+    const [ buyMonthlyCost, setBuyMonthlyCost ] = useState(0);
 
     // RENT
     const [ upFrontRentCost, setUpFrontRentCost ] = useState(0);
@@ -78,6 +79,7 @@ const Calculator = () => {
                         <Buying 
                             monthlyCosts={monthlyCosts}
                             setMonthlyCosts={setMonthlyCosts}
+                            setBuyMonthlyCost={setBuyMonthlyCost}
                             upFrontCosts={upFrontCosts}
                             setUpFrontCosts={setUpFrontCosts}
                             depAmount={depAmount}
@@ -109,7 +111,7 @@ const Calculator = () => {
                             saveRent={saveRent}
                             setSaveRent={setSaveRent}
                             rentMonthlyCost={rentMonthlyCost}
-                            monthlyCosts={monthlyCosts}
+                            buyMonthlyCost={buyMonthlyCost}
                             aer={aer}
                             setAer={setAer}
                         />
