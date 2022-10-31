@@ -17,7 +17,10 @@ const Saving = ({
 
     // Calculating monthly cost delta
     useEffect(() => {
-        const delta = rentMonthlyCost - buyMonthlyCost;
+        const delta = (rentMonthlyCost/(fixedTerm*12)) - buyMonthlyCost;
+        // console.log("rentMonthlyCost", rentMonthlyCost);
+        // console.log("buyMonthlyCost", buyMonthlyCost);
+        // console.log("delta", delta);
         if (delta > 0) {
             setMonthlyDelta(delta);
             setSaveBuy(delta);
@@ -57,10 +60,10 @@ const Saving = ({
             <p>How much will you be saving per month, whilst buying/renting?</p>
             <div className={style.flexNorm}>
                 <p>Saving whilst buying (PCM):
-                    <input type="number" id="saveBuy" name="saveBuy" value={saveBuy} onChange={handleSaveBuyChange}/>
+                    <input type="number" id="saveBuy" name="saveBuy" value={saveBuy.toFixed(0)} onChange={handleSaveBuyChange}/>
                 </p>
                 <p htmlFor="saveRent">Saving whilst renting (PCM):
-                    <input type="number" id="saveRent" name="saveRent" value={saveRent} onChange={handleSaveRentChange}/>
+                    <input type="number" id="saveRent" name="saveRent" value={saveRent.toFixed(0)} onChange={handleSaveRentChange}/>
                 </p>
             </div>
             <div className={style.savingFlex}>
