@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import style from './RentInput.module.css';
+import style from './Renting.module.css';
 
-const RentInput = ({
+const Renting = ({
     setRentMonthlyCost,
     fixedTerm,
     setUpFrontRentCost,
@@ -74,7 +74,7 @@ const RentInput = ({
     }
     
     return(
-        <div className={style.RentInput}>
+        <div className={style.Renting}>
             <form>
                 <div className={style.Rent}>
                     <h5>Rental Property</h5>
@@ -126,4 +126,4 @@ const RentInput = ({
     );
 }
 
-export default RentInput;
+export default Renting;

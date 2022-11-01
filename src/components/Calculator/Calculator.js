@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import style from './Calculator.module.css';
 
 import Totals from '../Totals/Totals';
-import PersonalFinances from '../PersonalFinances/PersonalFinances';
+import CurrentPosition from '../CurrentPosition/CurrentPosition';
 import Buying from '../Buying/Buying';
-import RentInput from '../RentInput/RentInput';
+import Renting from '../Renting/Renting';
 import Saving from '../Saving/Saving';
 
 const Calculator = () => {
@@ -71,11 +71,11 @@ const Calculator = () => {
                     setAccruedSavingsRent={setAccruedSavingsRent}
                 />
                 <div className={style.colFlex}>
-                <PersonalFinances 
-                    currentSavings={currentSavings}
-                    setCurrentSavings={setCurrentSavings}
-                />
-                <div className={style.buySection}>
+                    <CurrentPosition 
+                        currentSavings={currentSavings}
+                        setCurrentSavings={setCurrentSavings}
+                    />
+                    <div className={style.buySection}>
                         <Buying 
                             monthlyCosts={monthlyCosts}
                             setMonthlyCosts={setMonthlyCosts}
@@ -93,9 +93,9 @@ const Calculator = () => {
                             periodInterestCost={periodInterestCost}
                             setCapitalRepaid={setCapitalRepaid}
                         />
-                </div>
-                <div className={style.rentSection}>
-                        <RentInput 
+                    </div>
+                    <div className={style.rentSection}>
+                        <Renting 
                             setRentMonthlyCost={setRentMonthlyCost}
                             fixedTerm={fixedTerm}
                             setUpFrontRentCost={setUpFrontRentCost}

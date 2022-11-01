@@ -52,6 +52,7 @@ const Saving = ({
         setAer(annualEquivelantRate);
     }
 
+    // VIEW
     return(
         <div className={style.Saving}>
             <h5>Monthly saving</h5>

@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
+
 import style from './Buying.module.css';
+
+// Components
+import Mortgage from '../Mortgage/Mortgage';
+import UpfrontCostsBuy from '../UpfrontCostsBuy/UpfrontCostsBuy';
+import MonthlyCostsBuy from '../MonthlyCostsBuy/MonthlyCostsBuy';
+
 
 const Buying = ({
         monthlyCosts,
@@ -141,70 +148,7 @@ const Buying = ({
         setGrowthRate(annualRate);
     }
 
-    const handleCheckChange = () => { 
-        setFtbCheckBox(!ftbCheckBox);
-    }
 
-    const handleDepChange = event => { 
-        const newDepPerc = parseInt(event.target.value);
-        setDepPercent(newDepPerc);
-        setDepAmount((newDepPerc/100)*propValue);
-    }
-
-    const handleDepAmountChange = event => {
-        var newDepAmount = parseInt(event.target.value);
-        setDepAmount(newDepAmount);
-        var newDepPerc = newDepAmount/propValue;
-        newDepPerc = (newDepPerc*100).toFixed(1);
-        setDepPercent(newDepPerc);
-    }
-
-    const handleMortTermChange = (event) => {
-        const newMortTerm = parseInt(event.target.value);
-        setMortTerm(newMortTerm);
-    }
-
-    const handleIntChange = (event) => {
-        const newIntRate = parseFloat(event.target.value);
-        setIntRate(newIntRate);
-    }
-
-    // Upfront Cost handlers
-    const handleLegalCostChange = (event) => {
-        var newLegalCost = parseInt(event.target.value);
-        setLegalCost(newLegalCost);
-    }
-
-    
-    const handleAddToMortgage = () => { 
-        setAddToMortgage(!addToMortgage);
-    }
-
-    const handleMortFeeChange = (event) => {
-        const newMortFee = parseInt(event.target.value);
-        setMortFee(newMortFee);
-    }
-    
-    const handleSurvCostChange = (event) => {
-        const newSurvCost = parseInt(event.target.value);
-        setSurvCost(newSurvCost);
-    }
-
-    // Monthly Cost Handlers
-    const handleGroundRentChange = (event) => {
-        const newGRent = parseInt(event.target.value);
-        setGroundRent(newGRent);
-    }
-
-    const handleServChargeChange = (event) => {
-        const newServCharge = parseInt(event.target.value);
-        setServCharge(newServCharge);
-    }
-
-    const handleMaintenanceChange = (event) => {
-        var newMaintCost = parseInt(event.target.value);
-        setMonthlyMaintenance(newMaintCost);
-    }
 
     // Calculations
     const monthlyMortgage = (pValue, iRate, tYears, dep, addFee, feeValue) => {
@@ -221,76 +165,52 @@ const Buying = ({
         setMortPrinciple(principle);
     }
 
-
+    // VIEW
     return(
         <div className={style.Buying}>
             <form>
-                <h5>Purchase Property</h5>
-                <div className={style.flexNorm}>
-                    <p>Property Value:</p>
-                    <input type="number" id="pvalue" name="pvalue" defaultValue={propValue} onChange={handlePropValue}/>
-                    <p>Annual growth rate (%):</p>
-                    <input type="number" id="pGrowth" name="pGrowth" defaultValue={growthRate} onChange={handleGrowthRateChange}/>
+                <div className={style.Buy}>
+                    <h5>Purchase Property</h5>
+                    <div className={style.flexNorm}>
+                        <p>Property Value:</p>
+                        <input type="number" id="pvalue" name="pvalue" defaultValue={propValue} onChange={handlePropValue}/>
+                        <p>Annual growth rate (%):</p>
+                        <input type="number" id="pGrowth" name="pGrowth" defaultValue={growthRate} onChange={handleGrowthRateChange}/>
+                    </div>
                 </div>
-                <h5>Mortgage</h5>
-                <div className={style.flexNorm}>
-                    <label htmlFor="dperc">Deposit %:
-                        <input type="number" id="dperc" name="dperc" value={depPercent} onChange={handleDepChange}/>
-                    </label>
-                    <label htmlFor="dvalue">Deposit:
-                        <input type="number" id="deposit" name="deposit" value={depAmount} onChange={handleDepAmountChange}/>
-                    </label>
-                </div>
-                <div className={style.flexNorm}>
-                    <label htmlFor="dperc">Mortgage term:
-                        <input type="number" id="dperc" name="dperc" defaultValue={mortTerm} onChange={handleMortTermChange}/>
-                    </label>
-                    <label htmlFor="irate">Interest rate:
-                        <input type="number" id="irate" name="irate" defaultValue={intRate} onChange={handleIntChange}/>
-                    </label>
-                </div>
-                <h5>Upfront costs</h5>
-                <div className={style.flexNorm}>
-                    <label htmlFor="lcost">Stamp duty: 
-                        <div className={style.stampFlex}>
-                            <p>First time buyer?</p>
-                            <input type="checkbox" id="ftbCheck" name="ftbCheck" onChange={handleCheckChange} defaultValue={ftbCheckBox}/>
-                        </div>
-                        <input type="number" id="lcost" name="lcost" readOnly value={stampDutyCost.toFixed(0)}/>
-                    </label>
-                    <label htmlFor="mortgageFees">Mortgage fee:
-                        <div className={style.stampFlex}>
-                            <p>Add to mortgage</p>
-                            <input type="checkbox" id="mortFee" name="mortFee" onChange={handleAddToMortgage} checked={addToMortgage}/>
-                        </div>
-                        <input type="number" id="mfees" name="mfees" defaultValue={mortFee} onChange={handleMortFeeChange}/>
-                    </label>
-                </div>
-                <div className={style.flexNorm}>
-                    <label htmlFor="lcost">Legal:
-                        <input type="number" id="lcost" name="lcost" defaultValue={legalCost} onChange={handleLegalCostChange}/>
-                    </label>
-                    <label htmlFor="scost">Surveyor:
-                        <input type="number" id="scost" name="scost" defaultValue={survCost} onChange={handleSurvCostChange}/>
-                    </label>
-                </div>
-                <h5>Monthly costs</h5>
-                <div className={style.flexNorm}>
-                    <label htmlFor="mPayment">Mortgage Payment:
-                        <input readOnly type="number" id="mPayment" name="mPayment" value={mortgagePayment.toFixed(0)}/>
-                    </label>
-                    <label htmlFor="grent">Maintenance:
-                        <input type="number" id="grent" name="grent" defaultValue={monthlyMaintenance} onChange={handleMaintenanceChange}/>
-                    </label>
-                </div>
-                <div className={style.flexNorm}>
-                    <label htmlFor="grent">Ground rent:
-                        <input type="number" id="grent" name="grent" defaultValue={groundRent} onChange={handleGroundRentChange}/>
-                    </label>
-                    <label htmlFor="scharge">Service charge:
-                        <input type="number" id="scharge" name="scharge" defaultValue={servCharge} onChange={handleServChargeChange}/>
-                    </label> 
-                </div>
+                <Mortgage 
+                    depPercent={depPercent}
+                    setDepPercent={setDepPercent}
+                    propValue={propValue}
+                    depAmount={depAmount}
+                    setDepAmount={setDepAmount}
+                    mortTerm={mortTerm}
+                    setMortTerm={setMortTerm}
+                    intRate={intRate}
+                    setIntRate={setIntRate}
+                />
+                <UpfrontCostsBuy 
+                    ftbCheckBox={ftbCheckBox}
+                    setFtbCheckBox={setFtbCheckBox}
+                    addToMortgage={addToMortgage}
+                    setAddToMortgage={setAddToMortgage}
+                    legalCost={legalCost}
+                    setLegalCost={setLegalCost}
+                    mortFee={mortFee}
+                    setMortFee={setMortFee}
+                    survCost={survCost}
+                    setSurvCost={setSurvCost}
+                    stampDutyCost={stampDutyCost}
+                />
+                <MonthlyCostsBuy
+                    setMonthlyMaintenance={setMonthlyMaintenance}
+                    setGroundRent={setGroundRent}
+                    setServCharge={setServCharge}
+                    mortgagePayment={mortgagePayment}
+                    monthlyMaintenance={monthlyMaintenance}
+                    servCharge={servCharge}
+                    groundRent={groundRent}
+                />
             </form>
         </div>
     );

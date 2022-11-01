@@ -26,6 +26,7 @@ const Totals = ({
 
     // Calculating Compound interest on BUY savings [Formula: A=(P(1+r/n)^nt)+((PMT((1+r/n)**(nt))-1)/(r/n))]
     useEffect(() => { 
+        console.log("Total Compound interest buy: MOUNTED");
         var accruedAmount;
         const remainingSavings = currentSavings - sumUpFrontCosts - depositAmount;
         accruedAmount = remainingSavings*((1+((aer/100)/12))**(12*fixedTerm));
@@ -33,10 +34,14 @@ const Totals = ({
         var numerator = (saveBuy*(((1+(rOverN))**(12*fixedTerm))-1));
         accruedAmount = accruedAmount + (numerator/(rOverN));
         setAccruedSavingsBuy(accruedAmount);
+        return () => {
+            console.log("Total Compound interest buy: UNMOUNTED");
+        }
     }, [fixedTerm, currentSavings, aer, sumUpFrontCosts, depositAmount, setAccruedSavingsBuy, saveBuy]);
 
     // Calculating Compound interest on RENT savings [Formula: A=(P(1+r/n)^nt)+((PMT((1+r/n)**(nt))-1)/(r/n))]
     useEffect(() => { 
+        console.log("Total Compound interest rent: MOUNTED");
         var accruedAmount;
         const remainingSavings = currentSavings - upFrontRentCost - securityDeposit;
         accruedAmount = remainingSavings*((1+((aer/100)/12))**(12*fixedTerm));
@@ -44,15 +49,18 @@ const Totals = ({
         var numerator = (saveRent*(((1+(rOverN))**(12*fixedTerm))-1));
         accruedAmount = accruedAmount + (numerator/(rOverN));
         setAccruedSavingsRent(accruedAmount);
+        return () => {
+            console.log("Total Compound interest rent: UNMOUNTED");
+        }
     }, [fixedTerm, currentSavings, aer, upFrontRentCost, securityDeposit, setAccruedSavingsRent, saveRent]);
 
-
-    // CONSIDER A USEEFFECT TO CALCULATE THESE VALUES RATHER THAN CALCULATING INLINE   
+    // Event handlers
     const handleFtermChange = (event) => {
         const newFixedTerm = parseInt(event.target.value);
         setFixedTerm(newFixedTerm);
     }   
 
+    // VIEW
     return(
         <div className={style.Totals}>
             <div className={style.fixSideBar}>  

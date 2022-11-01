@@ -42,25 +42,6 @@
     flex-direction: column;
 }
 
-.stampFlex {
-    display: flex;
-    width: 50%;
-    margin: auto;
-    vertical-align: middle;
-    /* text-align: center; */
-    justify-content: space-around;
-}
-
-.stampFlex p{
-    font-size: 0.8rem;
-    text-align: left;
-    margin: auto;
-}
-
-.stampFlex input{
-    width: 1rem !important;
-    height: 1rem !important;
-}
 
 .dropDown {
     margin: 0.5rem;

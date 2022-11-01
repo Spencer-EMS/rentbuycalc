@@ -1,7 +1,7 @@
 import React from 'react';
-import style from './PersonalFinances.module.css';
+import style from './CurrentPosition.module.css';
 
-const PersonalFinances = (props) => {
+const CurrentPosition = (props) => {
 
     // Event handlers
     const handleSavingsChange = (event) => {
@@ -9,8 +9,9 @@ const PersonalFinances = (props) => {
         props.setCurrentSavings(savings);
     }
 
+    // VIEW
     return(
-        <div className={style.PersonalFinances}>
+        <div className={style.CurrentPosition}>
             <div className={style.financeFlex}>
                 <div className={style.colFlex}>
                     <p>Savings / Equity:</p>
@@ -21,4 +22,4 @@ const PersonalFinances = (props) => {
     );
 }
 
-export default PersonalFinances;
+export default CurrentPosition;

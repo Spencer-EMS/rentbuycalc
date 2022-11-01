@@ -1,4 +1,4 @@
-.RentInput {
+.Renting {
     width: 38rem;
     margin: auto;
 }
@@ -19,28 +19,28 @@
 }
 
 
-.RentInput form{
+.Renting form{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.RentInput label {
+.Renting label {
     width: 100%;
 }
 
-.RentInput h3 {
+.Renting h3 {
     width: 100%;
     margin: 0.5rem;
 }
 
-.RentInput h4{
+.Renting h4{
     all: unset;
     font-weight: bold;
     vertical-align: middle;
 }
 
-.RentInput input {
+.Renting input {
     margin: 0.5rem;
     width: 80%;
 }
