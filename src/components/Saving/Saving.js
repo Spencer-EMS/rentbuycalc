@@ -18,9 +18,6 @@ const Saving = ({
     // Calculating monthly cost delta
     useEffect(() => {
         const delta = (rentMonthlyCost/(fixedTerm*12)) - buyMonthlyCost;
-        // console.log("rentMonthlyCost", rentMonthlyCost);
-        // console.log("buyMonthlyCost", buyMonthlyCost);
-        // console.log("delta", delta);
         if (delta > 0) {
             setMonthlyDelta(delta);
             setSaveBuy(delta);
@@ -55,7 +52,7 @@ const Saving = ({
     // VIEW
     return(
         <div className={style.Saving}>
-            <h5>Monthly saving</h5>
+            <h5>Saving</h5>
             <p>Buying PCM: £{buyMonthlyCost} || Rent PCM: £{(rentMonthlyCost/(fixedTerm*12)).toFixed(0)}</p>
             <p>the difference is £{monthlyDelta.toFixed(0)}</p>
             <p>How much will you be saving per month, whilst buying/renting?</p>

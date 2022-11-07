@@ -9,8 +9,8 @@ import MonthlyCostsBuy from '../MonthlyCostsBuy/MonthlyCostsBuy';
 
 
 const Buying = ({
-        monthlyCosts,
-        setMonthlyCosts,
+        sumMonthlyCosts,
+        setSumMonthlyCosts,
         setBuyMonthlyCost, 
         upFrontCosts, 
         setUpFrontCosts,
@@ -85,7 +85,7 @@ const Buying = ({
             }
         }
         stampDuty(propValue, ftbCheckBox);
-    }, [propValue, ftbCheckBox, depPercent, setDepAmount, setStampDutyCost]);
+    }, [propValue, depPercent, ftbCheckBox, setDepAmount, setStampDutyCost]);
 
     // Calculating Interest Cost across the time period [Formula: A=(P(1+r/n)^nt)-P]
     useEffect(() => { 
@@ -94,10 +94,10 @@ const Buying = ({
         intCost = intCost - mortPrinciple;
         setPeriodInterestCost(intCost);
         // Buy cost over fixed term
-        const termCost = fixedTerm*monthlyCosts;
+        const termCost = fixedTerm*sumMonthlyCosts;
         const totalBuyCost = upFrontCosts+termCost+intCost;
         setTimePeriodCost(totalBuyCost);
-    }, [setPeriodInterestCost, setTimePeriodCost, fixedTerm, upFrontCosts, monthlyCosts, mortPrinciple, intRate]);
+    }, [fixedTerm, upFrontCosts, sumMonthlyCosts, mortPrinciple, intRate, setPeriodInterestCost, setTimePeriodCost]);
 
     // Monthly Mortgage Payments
     useEffect(() => {
@@ -114,27 +114,28 @@ const Buying = ({
             upfrontCostSum = stampDutyCost + legalCost + mortFee + survCost;
         }
         setUpFrontCosts(upfrontCostSum);
-    }, [setUpFrontCosts, stampDutyCost, legalCost, mortFee, survCost, addToMortgage]);
+    }, [stampDutyCost, legalCost, mortFee, survCost, addToMortgage, setUpFrontCosts]);
 
     // Monthly cost sum
     useEffect(() => { 
         const monthlyCostSum = (monthlyMaintenance + servCharge + groundRent)*(fixedTerm*12);
-        setMonthlyCosts(monthlyCostSum);
+        setSumMonthlyCosts(monthlyCostSum);
         setBuyMonthlyCost(mortgagePayment + monthlyMaintenance + servCharge + groundRent);
-    }, [setMonthlyCosts, setBuyMonthlyCost, monthlyMaintenance, servCharge, groundRent, mortgagePayment, fixedTerm]);
+    }, [monthlyMaintenance, servCharge, groundRent, mortgagePayment, fixedTerm, setBuyMonthlyCost, setSumMonthlyCosts]);
 
     // Capital repaid
     useEffect(() => {
         const totalMonthlyPayments = mortgagePayment*(fixedTerm*12);
         const capRepaid = totalMonthlyPayments - periodInterestCost;
         setCapitalRepaid(capRepaid);
-    }, [mortgagePayment, periodInterestCost, fixedTerm, setCapitalRepaid]);
+    }, [fixedTerm, mortgagePayment, periodInterestCost, setCapitalRepaid]);
     
-    useEffect(() => { // Capital Gains
+    // Capital Gains
+    useEffect(() => { 
         const futureMarketValue = propValue*((1+((growthRate/100)/12))**(12*fixedTerm));
         const capGain = futureMarketValue - propValue;
         setCapitalGains(capGain);
-    }, [fixedTerm, stampDutyCost, setCapitalGains, propValue, growthRate]);
+    }, [propValue, fixedTerm, stampDutyCost, setCapitalGains, growthRate]);
 
 
     // Event handlers
@@ -147,8 +148,6 @@ const Buying = ({
         const annualRate = parseFloat(event.target.value);
         setGrowthRate(annualRate);
     }
-
-
 
     // Calculations
     const monthlyMortgage = (pValue, iRate, tYears, dep, addFee, feeValue) => {

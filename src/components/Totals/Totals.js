@@ -41,7 +41,6 @@ const Totals = ({
 
     // Calculating Compound interest on RENT savings [Formula: A=(P(1+r/n)^nt)+((PMT((1+r/n)**(nt))-1)/(r/n))]
     useEffect(() => { 
-        console.log("Total Compound interest rent: MOUNTED");
         var accruedAmount;
         const remainingSavings = currentSavings - upFrontRentCost - securityDeposit;
         accruedAmount = remainingSavings*((1+((aer/100)/12))**(12*fixedTerm));
@@ -49,9 +48,6 @@ const Totals = ({
         var numerator = (saveRent*(((1+(rOverN))**(12*fixedTerm))-1));
         accruedAmount = accruedAmount + (numerator/(rOverN));
         setAccruedSavingsRent(accruedAmount);
-        return () => {
-            console.log("Total Compound interest rent: UNMOUNTED");
-        }
     }, [fixedTerm, currentSavings, aer, upFrontRentCost, securityDeposit, setAccruedSavingsRent, saveRent]);
 
     // Event handlers
@@ -66,7 +62,7 @@ const Totals = ({
             <div className={style.fixSideBar}>  
                 <h3>Totals</h3>
                 <div className={style.colFlex}>
-                    <label htmlFor="fterm">Time:
+                    <p>Time:
                         <select id="fterm" name="fterm" defaultValue={fixedTerm} onChange={handleFtermChange} className={style.dropDown}> 
                             <option type="number" value="1">1 Year</option>
                             <option type="number" value="2">2 Years</option>
@@ -76,7 +72,7 @@ const Totals = ({
                             <option type="number" value="7">7 Years</option>
                             <option type="number" value="10">10 Years</option>
                         </select>
-                    </label>
+                    </p>
                     <h4>Buying</h4>
                     <p>Upfront costs: £{sumUpFrontCosts.toFixed(0)}</p>
                     <p>Monthly costs: £{sumMonthlyCosts.toFixed(0)}</p>

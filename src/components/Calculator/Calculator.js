@@ -26,7 +26,7 @@ const Calculator = () => {
 
     // BUY
     const [ upFrontCosts, setUpFrontCosts ] = useState(0);
-    const [ monthlyCosts, setMonthlyCosts ] = useState(0);
+    const [ sumMonthlyCosts, setSumMonthlyCosts ] = useState(0);
     const [ timePeriodCost, setTimePeriodCost ] = useState(0);
     const [ periodInterestCost, setPeriodInterestCost ] = useState(0);
     const [ capitalGains, setCapitalGains ] = useState(0);
@@ -54,7 +54,7 @@ const Calculator = () => {
                     fixedTerm={fixedTerm}
                     setFixedTerm={setFixedTerm}
                     sumUpFrontCosts={upFrontCosts}
-                    sumMonthlyCosts={monthlyCosts}
+                    sumMonthlyCosts={sumMonthlyCosts}
                     buyTotalCost={timePeriodCost}
                     periodInterestCost={periodInterestCost}
                     capitalGains={capitalGains}
@@ -77,8 +77,8 @@ const Calculator = () => {
                     />
                     <div className={style.buySection}>
                         <Buying 
-                            monthlyCosts={monthlyCosts}
-                            setMonthlyCosts={setMonthlyCosts}
+                            sumMonthlyCosts={sumMonthlyCosts}
+                            setSumMonthlyCosts={setSumMonthlyCosts}
                             setBuyMonthlyCost={setBuyMonthlyCost}
                             upFrontCosts={upFrontCosts}
                             setUpFrontCosts={setUpFrontCosts}

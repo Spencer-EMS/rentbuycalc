@@ -11,7 +11,7 @@ const Renting = ({
 
     const [ refCost, setRefCost ] = useState(((1*199)*1.2).toFixed(2));
     const [ adminCost, setAdminCost ] = useState(240);
-    const [ rent, setRent ] = useState(1000);
+    const [ rent, setRent ] = useState(1200);
     const [ rentIncrease, setRentIncrease ] = useState(4);
     const [ depWeeks, setDepWeeks ] = useState(4);
     const [ rentServiceCharge, setRentServiceCharge ] = useState(0);
@@ -85,6 +85,21 @@ const Renting = ({
                         <input type="number" id="rinc" name="rinc" defaultValue={rentIncrease} onChange={handleRentIncreaseChange}/>
                     </div>
                 </div>
+
+                <p>Security Deposit:</p>
+                <div className={style.secDepFlex}>
+                    <label htmlFor="fterm">Weeks:
+                        <select id="fterm" name="fterm" defaultValue={depWeeks} onChange={handleDepWeekChange} className={style.dropDown}> 
+                            <option type="number" value="1">1 weeks</option>
+                            <option type="number" value="2">2 weeks</option>
+                            <option type="number" value="3">3 weeks</option>
+                            <option type="number" value="4">4 weeks</option>
+                            <option type="number" value="5">5 weeks</option>
+                        </select>
+                    </label>
+                    <input readOnly type="number" id="secDep" value={securityDeposit.toFixed(0)} className={style.refInput}/>
+                </div>
+
                 <h5>Upfront costs</h5>
                 <div className={style.flexNorm}>
                     <label htmlFor="mfees">Referencing: 
@@ -99,19 +114,7 @@ const Renting = ({
                     <input type="number" id="afees" defaultValue={adminCost} className={style.adminInput} onChange={handleAdminChange}/>
                     </label>
                 </div>
-                <p>Security Deposit:</p>
-                <div className={style.secDepFlex}>
-                    <label htmlFor="fterm">Weeks:
-                        <select id="fterm" name="fterm" defaultValue={depWeeks} onChange={handleDepWeekChange} className={style.dropDown}> 
-                            <option type="number" value="1">1 weeks</option>
-                            <option type="number" value="2">2 weeks</option>
-                            <option type="number" value="3">3 weeks</option>
-                            <option type="number" value="4">4 weeks</option>
-                            <option type="number" value="5">5 weeks</option>
-                        </select>
-                    </label>
-                    <input readOnly type="number" id="secDep" value={securityDeposit.toFixed(0)} className={style.refInput}/>
-                </div>
+                
                 <h5>Monthly costs</h5>
                 <div className={style.flexNorm}>
                     <label htmlFor="renserv">Service charge (pcm):
