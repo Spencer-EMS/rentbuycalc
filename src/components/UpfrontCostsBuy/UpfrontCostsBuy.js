@@ -15,7 +15,6 @@ const UpfrontCostsBuy = ({
     setSurvCost,
     stampDutyCost
 }) => {
-    
 
     const handleCheckChange = () => { 
         setFtbCheckBox(!ftbCheckBox);
@@ -48,7 +47,7 @@ const UpfrontCostsBuy = ({
                 <label htmlFor="lcost">Stamp duty: 
                     <div className={style.stampFlex}>
                         <p>First time buyer?</p>
-                        <input type="checkbox" id="ftbCheck" name="ftbCheck" onChange={handleCheckChange} defaultValue={ftbCheckBox}/>
+                        <input type="checkbox" id="ftbCheck" name="ftbCheck" onChange={handleCheckChange} checked={ftbCheckBox}/>
                     </div>
                     <input type="number" id="lcost" name="lcost" readOnly value={stampDutyCost.toFixed(0)}/>
                 </label>

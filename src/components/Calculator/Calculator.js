@@ -12,6 +12,12 @@ const Calculator = () => {
     // time period
     const [ fixedTerm, setFixedTerm ] = useState(2);
 
+    // Buy property value
+    const [ propValue, setPropValue ] = useState(350000);
+
+    // Rent per month
+    const [ rent, setRent ] = useState(1200);
+
     // Current Savings/Equity
     const [ currentSavings, setCurrentSavings ] = useState(30000);
 
@@ -72,11 +78,16 @@ const Calculator = () => {
                 />
                 <div className={style.colFlex}>
                     <CurrentPosition 
+                        propValue={propValue}
+                        setPropValue={setPropValue}
+                        rent={rent}
+                        setRent={setRent}
                         currentSavings={currentSavings}
                         setCurrentSavings={setCurrentSavings}
                     />
                     <div className={style.buySection}>
                         <Buying 
+                            propValue={propValue}
                             sumMonthlyCosts={sumMonthlyCosts}
                             setSumMonthlyCosts={setSumMonthlyCosts}
                             setBuyMonthlyCost={setBuyMonthlyCost}
@@ -96,6 +107,8 @@ const Calculator = () => {
                     </div>
                     <div className={style.rentSection}>
                         <Renting 
+                            rent={rent}
+                            setRent={setRent}
                             setRentMonthlyCost={setRentMonthlyCost}
                             fixedTerm={fixedTerm}
                             setUpFrontRentCost={setUpFrontRentCost}

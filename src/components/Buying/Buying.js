@@ -9,6 +9,7 @@ import MonthlyCostsBuy from '../MonthlyCostsBuy/MonthlyCostsBuy';
 
 
 const Buying = ({
+        propValue,
         sumMonthlyCosts,
         setSumMonthlyCosts,
         setBuyMonthlyCost, 
@@ -27,7 +28,7 @@ const Buying = ({
     }) => {
 
     // input variables 
-    const [ propValue, setPropValue ] = useState(250000);
+    // const [ propValue, setPropValue ] = useState(250000);
     const [ growthRate, setGrowthRate ] = useState(3);
     const [ depPercent, setDepPercent ] = useState(10);
     const [ mortTerm, setMortTerm ] = useState(25);
@@ -53,6 +54,7 @@ const Buying = ({
     
     // Stamp Duty & Deposit
     useEffect(() => {
+        console.log("SDLT useeffect", ftbCheckBox);
         setDepAmount(propValue*(depPercent/100));
         var test1 = propValue-(propValue*(depPercent/100));
         setMortPrinciple(test1);
@@ -69,7 +71,7 @@ const Buying = ({
                     sdltTotal = ((value - 1499999)*0.12)+((value - 925001)*0.1)+(675000*0.05);
                 }
                 setStampDutyCost(sdltTotal);
-            } else if (ftbBool === true) {
+            } else if (ftbBool !== false) {
                 if (value <= 425000) {
                     sdltTotal = 0;
                 } else if (value >= 425000 && value <= 625000) {
@@ -89,15 +91,17 @@ const Buying = ({
 
     // Calculating Interest Cost across the time period [Formula: A=(P(1+r/n)^nt)-P]
     useEffect(() => { 
-        var intCost;
-        intCost = mortPrinciple*((1+((intRate/100)/12))**(12*fixedTerm));
-        intCost = intCost - mortPrinciple;
+        const intCost = (mortPrinciple*((1+((intRate/100)/12))**(12*fixedTerm)))-mortPrinciple;
         setPeriodInterestCost(intCost);
-        // Buy cost over fixed term
+    }, [fixedTerm, mortPrinciple, intRate, setPeriodInterestCost]);
+
+    // Buy cost over fixed term
+    useEffect(() => { 
         const termCost = fixedTerm*sumMonthlyCosts;
-        const totalBuyCost = upFrontCosts+termCost+intCost;
+        const totalBuyCost = upFrontCosts+termCost+periodInterestCost;
         setTimePeriodCost(totalBuyCost);
-    }, [fixedTerm, upFrontCosts, sumMonthlyCosts, mortPrinciple, intRate, setPeriodInterestCost, setTimePeriodCost]);
+    }, [periodInterestCost, fixedTerm, upFrontCosts, sumMonthlyCosts, setTimePeriodCost]);
+
 
     // Monthly Mortgage Payments
     useEffect(() => {
@@ -107,13 +111,14 @@ const Buying = ({
     
     // Totals
     useEffect(() => { // upFront cost Sum
-        var upfrontCostSum;
+        console.log("addToMortgage", addToMortgage);
         if (addToMortgage !== false) {
-            upfrontCostSum = stampDutyCost + legalCost + survCost;
+            const upfrontCostSum = stampDutyCost + legalCost + survCost;
+            setUpFrontCosts(upfrontCostSum);
         } else {
-            upfrontCostSum = stampDutyCost + legalCost + mortFee + survCost;
-        }
-        setUpFrontCosts(upfrontCostSum);
+            const upfrontCostSum = stampDutyCost + legalCost + mortFee + survCost;
+            setUpFrontCosts(upfrontCostSum);
+        }  
     }, [stampDutyCost, legalCost, mortFee, survCost, addToMortgage, setUpFrontCosts]);
 
     // Monthly cost sum
@@ -135,14 +140,14 @@ const Buying = ({
         const futureMarketValue = propValue*((1+((growthRate/100)/12))**(12*fixedTerm));
         const capGain = futureMarketValue - propValue;
         setCapitalGains(capGain);
-    }, [propValue, fixedTerm, stampDutyCost, setCapitalGains, growthRate]);
+    }, [propValue, fixedTerm, setCapitalGains, growthRate]);
 
 
     // Event handlers
-    const handlePropValue = event => {
-        const newPropValue = parseInt(event.target.value);
-        setPropValue(newPropValue);
-    }
+    // const handlePropValue = event => {
+    //     const newPropValue = parseInt(event.target.value);
+    //     setPropValue(newPropValue);
+    // }
 
     const handleGrowthRateChange = event => {
         const annualRate = parseFloat(event.target.value);
@@ -172,7 +177,7 @@ const Buying = ({
                     <h5>Purchase Property</h5>
                     <div className={style.flexNorm}>
                         <p>Property Value:</p>
-                        <input type="number" id="pvalue" name="pvalue" defaultValue={propValue} onChange={handlePropValue}/>
+                        <input type="number" id="pvalue" name="pvalue" value={propValue} readOnly/>
                         <p>Annual growth rate (%):</p>
                         <input type="number" id="pGrowth" name="pGrowth" defaultValue={growthRate} onChange={handleGrowthRateChange}/>
                     </div>
