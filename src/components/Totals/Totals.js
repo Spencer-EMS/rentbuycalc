@@ -26,7 +26,7 @@ const Totals = ({
 
     const [ rentEquity, setRentEquity ] = useState(0);
     const [ buyEquity, setBuyEquity ] = useState(0);
-    const [ comparisonMessage, setComparisonMessage ] = useState(0);
+    const [ comparisonMessage, setComparisonMessage ] = useState("");
     const [ equityDelta, setEquityDelta ] = useState(0);
 
     // Calculating Compound interest on BUY savings [Formula: A=(P(1+r/n)^nt)+((PMT((1+r/n)**(nt))-1)/(r/n))]
@@ -66,12 +66,12 @@ const Totals = ({
         var delta = buyEquity - rentEquity;
         var message;
         if (delta > 0) {
-            message = "Buying outperforms Renting by:";
+            message = "Buying outperforms Renting";
             setEquityDelta(delta);
         } else if (delta === 0) {
             message = "Renting and Buying are equal";
         } else if (delta < 0) {
-            message = "Renting outperforms Buying by:";
+            message = "Renting outperforms Buying";
             setEquityDelta(delta*(-1));
         }
         setComparisonMessage(message);
@@ -102,7 +102,7 @@ const Totals = ({
                         </select>
                     </p>
                     <p>{comparisonMessage}</p>
-                    <p>£{equityDelta.toFixed(0)}</p>
+                    <p>by: <strong>£{equityDelta.toFixed(0)}</strong></p>
                     <h4>Buying</h4>
                     <p>Upfront costs: £{sumUpFrontCosts.toFixed(0)}</p>
                     <p>Monthly costs: £{sumMonthlyCosts.toFixed(0)}</p>

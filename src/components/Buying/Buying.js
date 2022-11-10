@@ -24,7 +24,8 @@ const Buying = ({
         periodInterestCost,
         setTimePeriodCost,
         setCapitalGains,
-        setCapitalRepaid
+        setCapitalRepaid,
+        ftbCheckBox
     }) => {
 
     // input variables 
@@ -50,11 +51,11 @@ const Buying = ({
 
     // Booleans
     const [ addToMortgage, setAddToMortgage ] = useState(true);
-    const [ ftbCheckBox, setFtbCheckBox ] = useState(false);
+    // const [ ftbCheckBox, setFtbCheckBox ] = useState(false);
     
     // Stamp Duty & Deposit
     useEffect(() => {
-        console.log("SDLT useeffect", ftbCheckBox);
+        // console.log("SDLT useeffect", ftbCheckBox);
         setDepAmount(propValue*(depPercent/100));
         var test1 = propValue-(propValue*(depPercent/100));
         setMortPrinciple(test1);
@@ -111,7 +112,7 @@ const Buying = ({
     
     // Totals
     useEffect(() => { // upFront cost Sum
-        console.log("addToMortgage", addToMortgage);
+        // console.log("addToMortgage", addToMortgage);
         if (addToMortgage !== false) {
             const upfrontCostSum = stampDutyCost + legalCost + survCost;
             setUpFrontCosts(upfrontCostSum);
@@ -172,7 +173,7 @@ const Buying = ({
     // VIEW
     return(
         <div className={style.Buying}>
-            <form>
+            <div className={style.BuyingWrapper}>
                 <div className={style.Buy}>
                     <h5>Purchase Property</h5>
                     <div className={style.flexNorm}>
@@ -194,8 +195,6 @@ const Buying = ({
                     setIntRate={setIntRate}
                 />
                 <UpfrontCostsBuy 
-                    ftbCheckBox={ftbCheckBox}
-                    setFtbCheckBox={setFtbCheckBox}
                     addToMortgage={addToMortgage}
                     setAddToMortgage={setAddToMortgage}
                     legalCost={legalCost}
@@ -205,6 +204,7 @@ const Buying = ({
                     survCost={survCost}
                     setSurvCost={setSurvCost}
                     stampDutyCost={stampDutyCost}
+                    ftbCheckBox={ftbCheckBox}
                 />
                 <MonthlyCostsBuy
                     setMonthlyMaintenance={setMonthlyMaintenance}
@@ -215,7 +215,7 @@ const Buying = ({
                     servCharge={servCharge}
                     groundRent={groundRent}
                 />
-            </form>
+            </div>
         </div>
     );
 }

@@ -40,25 +40,30 @@ const Mortgage = ({
     }
 
     return(
-        <>
+        <div className={style.Mortgage}>
             <h5>Mortgage</h5>
             <div className={style.flexNorm}>
-                <label htmlFor="dperc">Deposit %:
+                <div className={style.colFlex}>
+                    <p>Deposit %:</p>
                     <input type="number" id="dperc" name="dperc" value={depPercent} onChange={handleDepChange}/>
-                </label>
-                <label htmlFor="dvalue">Deposit:
+                </div>
+                <div className={style.colFlex}>
+                    <p>Deposit:</p>
                     <input type="number" id="deposit" name="deposit" value={depAmount} onChange={handleDepAmountChange}/>
-                </label>
+                </div>
+                
             </div>
             <div className={style.flexNorm}>
-                <label htmlFor="dperc">Mortgage term:
+                <div className={style.colFlex}>
+                    <p>Mortgage term:</p>
                     <input type="number" id="dperc" name="dperc" defaultValue={mortTerm} onChange={handleMortTermChange}/>
-                </label>
-                <label htmlFor="irate">Interest rate:
+                </div>
+                <div className={style.colFlex}>
+                    <p>Interest rate:</p>
                     <input type="number" id="irate" name="irate" defaultValue={intRate} onChange={handleIntChange}/>
-                </label>
+                </div>
             </div>
-        </> 
+        </div> 
     );
 }
 

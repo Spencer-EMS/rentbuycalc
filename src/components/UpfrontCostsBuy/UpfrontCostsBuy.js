@@ -4,7 +4,6 @@ import style from './UpfrontCostsBuy.module.css';
 
 const UpfrontCostsBuy = ({
     ftbCheckBox,
-    setFtbCheckBox,
     addToMortgage,
     setAddToMortgage,
     legalCost,
@@ -16,9 +15,9 @@ const UpfrontCostsBuy = ({
     stampDutyCost
 }) => {
 
-    const handleCheckChange = () => { 
-        setFtbCheckBox(!ftbCheckBox);
-    }
+    // const handleCheckChange = () => { 
+    //     setFtbCheckBox(!ftbCheckBox);
+    // }
 
     const handleLegalCostChange = (event) => {
         var newLegalCost = parseInt(event.target.value);
@@ -44,28 +43,34 @@ const UpfrontCostsBuy = ({
         <>
             <h5>Upfront costs</h5>
             <div className={style.flexNorm}>
-                <label htmlFor="lcost">Stamp duty: 
+                <div className={style.colFlex}>
+                    <p>Stamp duty:</p>
                     <div className={style.stampFlex}>
                         <p>First time buyer?</p>
-                        <input type="checkbox" id="ftbCheck" name="ftbCheck" onChange={handleCheckChange} checked={ftbCheckBox}/>
+                        <input type="checkbox" id="ftbCheck" name="ftbCheck" readOnly checked={ftbCheckBox}/>
                     </div>
                     <input type="number" id="lcost" name="lcost" readOnly value={stampDutyCost.toFixed(0)}/>
-                </label>
-                <label htmlFor="mortgageFees">Mortgage fee:
+                </div>
+                <div className={style.colFlex}>
+                    <p>Mortgage fee:</p>
                     <div className={style.stampFlex}>
                         <p>Add to mortgage</p>
                         <input type="checkbox" id="mortFee" name="mortFee" onChange={handleAddToMortgage} checked={addToMortgage}/>
                     </div>
                     <input type="number" id="mfees" name="mfees" defaultValue={mortFee} onChange={handleMortFeeChange}/>
-                </label>
+                </div>
+                
             </div>
             <div className={style.flexNorm}>
-                <label htmlFor="lcost">Legal:
+                <div className={style.colFlex}>
+                    <p>Legal:</p>
                     <input type="number" id="lcost" name="lcost" defaultValue={legalCost} onChange={handleLegalCostChange}/>
-                </label>
-                <label htmlFor="scost">Surveyor:
+                </div>
+                <div className={style.colFlex}>
+
+                    <p>Surveyor:</p>
                     <input type="number" id="scost" name="scost" defaultValue={survCost} onChange={handleSurvCostChange}/>
-                </label>
+                </div>
             </div>
         </>
     );

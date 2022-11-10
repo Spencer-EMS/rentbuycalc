@@ -1,6 +1,9 @@
 import { legacy_createStore } from 'redux';
 
-const initialState = {propertyValue: 200000};
+const initialState = {
+    propertyValue: 200000,
+    
+};
 
 // Reducer
 const propValueReducer = (state = initialState, action) => {

@@ -1,6 +1,7 @@
 .Calculator {
     display: flex;
     justify-content: center;
+    margin: 6rem;
 }
 
 .buyingFlex{

@@ -1,11 +1,11 @@
 .Totals{
     width: 18rem;
     height: 100%;
-    
 }
 
 .fixSideBar{
     position: fixed;
+    top: 6rem;
 }
 
 .Totals h3{

@@ -1,11 +1,11 @@
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white;
+  color: #05A;
   overflow: scroll;
 }
 

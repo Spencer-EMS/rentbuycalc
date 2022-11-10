@@ -1,11 +1,13 @@
 import React from 'react';
-import style from './CurrentPosition.module.css';
+import style from './UserInputs.module.css';
 
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 
-const CurrentPosition = ({
+const UserInputs = ({
     propValue,
     setPropValue,
+    ftbCheckBox,
+    setFtbCheckBox,
     currentSavings,
     setCurrentSavings,
     rent,
@@ -16,6 +18,10 @@ const CurrentPosition = ({
     const handlePropValue = event => {
         const newPropValue = parseInt(event.target.value);
         setPropValue(newPropValue);
+    }
+
+    const handleCheckChange = () => { 
+        setFtbCheckBox(!ftbCheckBox);
     }
 
     // const dispatch = useDispatch();
@@ -39,27 +45,33 @@ const CurrentPosition = ({
 
     // VIEW
     return(
-        <div className={style.CurrentPosition}>
+        <div className={style.UserInputs}>
             <div className={style.financeFlex}>
                 <div className={style.colFlex}>
                     <p>What cash savings or equity do you currently have?</p>
                     <input type="number" id="csavings" name="csavings" defaultValue={currentSavings} onChange={handleSavingsChange}/>
                 </div>
+                <div className={style.colFlex}>
+                    <p>Are you a first time buyer?</p>
+                    <div className={style.smallFlex}>
+
+                    <input type="checkbox" id="ftbCheck" name="ftbCheck" onChange={handleCheckChange} checked={ftbCheckBox}/>
+                    {ftbCheckBox?<p>Yes</p>:<p>No</p>}
+                    </div>
+                </div>
             </div>
             <div className={style.financeFlex}>
                 <div className={style.colFlex}>
-                        <p>What is the price of the property you want to buy?</p>
-                        <input type="number" id="csavings" name="csavings"  defaultValue={propValue} onChange={handlePropValue} />
+                    <p>What is the price of the property you want to buy?</p>
+                    <input type="number" id="csavings" name="csavings"  defaultValue={propValue} onChange={handlePropValue} />
                 </div>
                 <div className={style.colFlex}>
-                        <p>What is the monthly cost of the property you want to rent?</p>
-                        <input type="number" id="csavings" name="csavings" defaultValue={rent} onChange={handleRentChange} />
+                    <p>What is the monthly cost of the property you want to rent?</p>
+                    <input type="number" id="csavings" name="csavings" defaultValue={rent} onChange={handleRentChange} />
                 </div>
-                {/* <p>Monthly rent (pcm):</p>
-                        <input type="number" id="pvalue" name="pvalue" defaultValue={reduxTest} onChange={handlePropertyValueChange}/> */}
             </div>
         </div>
     );
 }
 
-export default CurrentPosition;
+export default UserInputs;
