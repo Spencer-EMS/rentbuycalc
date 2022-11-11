@@ -3,14 +3,21 @@
     width: 100%;
 }
 
-.flexNorm p{
-    /* all: unset; */
-    font-size: 0.8rem;
-}
-
 .flexNorm input {
     margin: 0.5rem;
     width: 80%;
+}
+
+.colFlex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+
+.colFlex p{
+    all: unset;
+    font-size: 0.8rem;
 }
 
 
@@ -32,4 +39,8 @@
 .stampFlex input{
     width: 1rem !important;
     height: 1rem !important;
+}
+
+.stampFlex h5{
+    color: #05a;
 }

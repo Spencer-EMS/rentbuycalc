@@ -18,9 +18,6 @@ const Saving = ({
     // Calculating monthly cost delta
     useEffect(() => {
         const delta = (rentMonthlyCost/(fixedTerm*12)) - buyMonthlyCost;
-        // console.log("rentMonthlyCost", rentMonthlyCost);
-        // console.log("buyMonthlyCost", buyMonthlyCost);
-        // console.log("delta", delta);
         if (delta > 0) {
             setMonthlyDelta(delta);
             setSaveBuy(delta);
@@ -55,22 +52,24 @@ const Saving = ({
     // VIEW
     return(
         <div className={style.Saving}>
-            <h5>Monthly saving</h5>
-            <p>Buying PCM: £{buyMonthlyCost} || Rent PCM: £{(rentMonthlyCost/(fixedTerm*12)).toFixed(0)}</p>
-            <p>the difference is £{monthlyDelta.toFixed(0)}</p>
-            <p>How much will you be saving per month, whilst buying/renting?</p>
-            <div className={style.flexNorm}>
-                <p>Saving whilst buying (PCM):
-                    <input type="number" id="saveBuy" name="saveBuy" value={saveBuy.toFixed(0)} onChange={handleSaveBuyChange}/>
-                </p>
-                <p htmlFor="saveRent">Saving whilst renting (PCM):
-                    <input type="number" id="saveRent" name="saveRent" value={saveRent.toFixed(0)} onChange={handleSaveRentChange}/>
-                </p>
-            </div>
-            <div className={style.savingFlex}>
-                <p>Saving rate (%):
-                    <input type="number" id="aer" name="aer" defaultValue={aer} onChange={handleAerChange}/>
-                </p>
+            <div className={style.SavingWrapper}>
+                <h4>Saving</h4>
+                <p>Buying PCM: £{buyMonthlyCost} || Rent PCM: £{(rentMonthlyCost/(fixedTerm*12)).toFixed(0)}</p>
+                <p>the difference is £{monthlyDelta.toFixed(0)}</p>
+                <p>How much will you be saving per month, whilst buying/renting?</p>
+                <div className={style.flexNorm}>
+                    <p>Saving whilst buying (PCM):
+                        <input type="number" id="saveBuy" name="saveBuy" value={saveBuy.toFixed(0)} onChange={handleSaveBuyChange}/>
+                    </p>
+                    <p htmlFor="saveRent">Saving whilst renting (PCM):
+                        <input type="number" id="saveRent" name="saveRent" value={saveRent.toFixed(0)} onChange={handleSaveRentChange}/>
+                    </p>
+                </div>
+                <div className={style.savingFlex}>
+                    <p>Saving rate (%):
+                        <input type="number" id="aer" name="aer" defaultValue={aer} onChange={handleAerChange}/>
+                    </p>
+                </div>
             </div>
         </div>
     );

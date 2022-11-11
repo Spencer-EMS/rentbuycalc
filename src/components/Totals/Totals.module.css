@@ -1,11 +1,11 @@
 .Totals{
     width: 18rem;
     height: 100%;
-    
 }
 
 .fixSideBar{
     position: fixed;
+    top: 6rem;
 }
 
 .Totals h3{
@@ -39,4 +39,14 @@
 
 .dropDown{
     margin: 0.5rem;
+}
+
+.flexWrap{
+    display: flex;
+    align-items: baseline;
+}
+
+.flexWrap h3{
+    margin: 0 1rem;
+    color: #05a;
 }

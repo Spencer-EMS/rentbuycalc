@@ -19,10 +19,14 @@
 }
 
 
-.Renting form{
+.RentingWrapper{
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: 2px solid #05A;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 10px 6px -6px #777;
 }
 
 .Renting label {
@@ -35,9 +39,10 @@
 }
 
 .Renting h4{
-    all: unset;
-    font-weight: bold;
-    vertical-align: middle;
+    /* all: unset; */
+    /* font-weight: bold; */
+    /* vertical-align: middle; */
+    margin: 0.5rem auto 1rem;
 }
 
 .Renting input {
@@ -60,11 +65,11 @@
 }
 
 .refFlex {
-    margin: 1rem auto;
+    /* margin: 1rem auto; */
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 2.5rem;
+    /* height: 2.5rem; */
 }
 
 .refFlex p{
@@ -73,20 +78,50 @@
     text-align: left;
 }
 
+.refFlex h5{
+    margin: 0 auto;
+}
+
 .secDepFlex{
     width: 80%;
     display: flex;
     justify-content: space-around;
 }
 
-.secDepFlex label{
+.secDepFlex p{
+    font-size: 0.8rem;
+}
+
+/* .secDepFlex label{
     width: 10rem;
     margin: auto;
     font-size: 0.9rem;
     display: flex;
     justify-content: space-between;
-}
+} */
 
 .secDepFlex input{
     width: 12rem !important;
+}
+
+.secDepFlex select{
+    margin: 0.5rem;
+}
+
+.colFlex{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    height: 4rem;
+}
+
+.colFlex p{
+    all: unset;
+    font-size: 0.8rem;
+}
+
+.Rent h5{
+    margin: 0 auto 1rem;
 }

@@ -1,0 +1,84 @@
+.Calculations{
+    width: 38rem;
+    margin: 2rem 0;
+}
+
+.Calculations p{
+    font-size: 0.8rem;
+}
+
+.CalculationsWrap{
+    border: 2px solid #05A;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 10px 6px -6px #777;
+    display: flex;
+    flex-direction: column;
+}
+
+.CalculationsWrap h4{
+    margin: 0 auto 1rem;
+}
+
+.flexWrap{
+    display: flex;
+    /* justify-content: space-around; */
+    /* margin: auto; */
+    width: 29rem;
+    justify-content: space-between;
+    align-items: bottom;
+    text-align: left;
+}
+
+.flexWrap p{
+    margin: 1rem;
+    min-width: 4rem;
+}
+
+.flexCost{
+    display: flex;
+    /* margin: auto; */
+    /* width: 90%; */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flexCost h6{
+    margin: 1rem;
+    width: 6rem;
+}
+
+.colFlexCost{
+    display: flex;
+    flex-direction: column;
+    border-left: 2px solid #fb3b1e;
+}
+
+.midBorder{
+    height: 0.12rem;
+    background-color: black;
+    margin: 2rem;
+}
+
+.flexBen{
+    display: flex;
+    /* margin: auto; */
+    /* width: 90%; */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flexBen h6{
+    margin: 1rem;
+    width: 6rem;
+}
+
+.colFlexBen{
+    display: flex;
+    flex-direction: column;
+    border-left: 2px solid #95bb72;
+}
+
+.spacer{
+    height: 3rem;
+}

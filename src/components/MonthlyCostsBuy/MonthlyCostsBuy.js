@@ -32,20 +32,24 @@ const MonthlyCostsBuy = ({
         <>
             <h5>Monthly costs</h5>
             <div className={style.flexNorm}>
-                <label htmlFor="mPayment">Mortgage Payment:
+                <div className={style.colFlex}>
+                    <p htmlFor="mPayment">Mortgage Payment:</p>
                     <input readOnly type="number" id="mPayment" name="mPayment" value={mortgagePayment.toFixed(0)}/>
-                </label>
-                <label htmlFor="grent">Maintenance:
+                </div>
+                <div className={style.colFlex}>
+                    <p htmlFor="grent">Maintenance:</p>
                     <input type="number" id="grent" name="grent" defaultValue={monthlyMaintenance} onChange={handleMaintenanceChange}/>
-                </label>
+                </div>
             </div>
             <div className={style.flexNorm}>
-                <label htmlFor="grent">Ground rent:
+                <div className={style.colFlex}>
+                    <p htmlFor="grent">Ground rent:</p>
                     <input type="number" id="grent" name="grent" defaultValue={groundRent} onChange={handleGroundRentChange}/>
-                </label>
-                <label htmlFor="scharge">Service charge:
+                </div>
+                <div className={style.colFlex}>
+                    <p htmlFor="scharge">Service charge:</p>
                     <input type="number" id="scharge" name="scharge" defaultValue={servCharge} onChange={handleServChargeChange}/>
-                </label> 
+                </div>
             </div>
         </>
     );

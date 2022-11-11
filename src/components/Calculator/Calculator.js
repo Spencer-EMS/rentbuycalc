@@ -2,20 +2,29 @@ import React, { useState } from 'react';
 import style from './Calculator.module.css';
 
 import Totals from '../Totals/Totals';
-import CurrentPosition from '../CurrentPosition/CurrentPosition';
+import Introduction from '../Introduction/Introduction';
+import UserInputs from '../UserInputs/UserInputs';
 import Buying from '../Buying/Buying';
 import Renting from '../Renting/Renting';
 import Saving from '../Saving/Saving';
+import Calculations from '../Calculations/Calculations';
 
 const Calculator = () => {
 
     // time period
     const [ fixedTerm, setFixedTerm ] = useState(2);
 
+    // Buy property value
+    const [ propValue, setPropValue ] = useState(325000);
+
+    // Rent per month
+    const [ rent, setRent ] = useState(1200);
+
     // Current Savings/Equity
-    const [ currentSavings, setCurrentSavings ] = useState(30000);
+    const [ currentSavings, setCurrentSavings ] = useState(40000);
 
     // Stamp Duty
+    const [ ftbCheckBox, setFtbCheckBox ] = useState(false);
     const [ stampDutyCost, setStampDutyCost ] = useState(0); 
 
     // readOnly values 
@@ -26,7 +35,7 @@ const Calculator = () => {
 
     // BUY
     const [ upFrontCosts, setUpFrontCosts ] = useState(0);
-    const [ monthlyCosts, setMonthlyCosts ] = useState(0);
+    const [ sumMonthlyCosts, setSumMonthlyCosts ] = useState(0);
     const [ timePeriodCost, setTimePeriodCost ] = useState(0);
     const [ periodInterestCost, setPeriodInterestCost ] = useState(0);
     const [ capitalGains, setCapitalGains ] = useState(0);
@@ -54,7 +63,7 @@ const Calculator = () => {
                     fixedTerm={fixedTerm}
                     setFixedTerm={setFixedTerm}
                     sumUpFrontCosts={upFrontCosts}
-                    sumMonthlyCosts={monthlyCosts}
+                    sumMonthlyCosts={sumMonthlyCosts}
                     buyTotalCost={timePeriodCost}
                     periodInterestCost={periodInterestCost}
                     capitalGains={capitalGains}
@@ -71,14 +80,22 @@ const Calculator = () => {
                     setAccruedSavingsRent={setAccruedSavingsRent}
                 />
                 <div className={style.colFlex}>
-                    <CurrentPosition 
+                    <Introduction />
+                    <UserInputs 
+                        propValue={propValue}
+                        setPropValue={setPropValue}
+                        rent={rent}
+                        setRent={setRent}
                         currentSavings={currentSavings}
                         setCurrentSavings={setCurrentSavings}
+                        ftbCheckBox={ftbCheckBox}
+                        setFtbCheckBox={setFtbCheckBox}
                     />
                     <div className={style.buySection}>
                         <Buying 
-                            monthlyCosts={monthlyCosts}
-                            setMonthlyCosts={setMonthlyCosts}
+                            propValue={propValue}
+                            sumMonthlyCosts={sumMonthlyCosts}
+                            setSumMonthlyCosts={setSumMonthlyCosts}
                             setBuyMonthlyCost={setBuyMonthlyCost}
                             upFrontCosts={upFrontCosts}
                             setUpFrontCosts={setUpFrontCosts}
@@ -92,10 +109,13 @@ const Calculator = () => {
                             setCapitalGains={setCapitalGains}
                             periodInterestCost={periodInterestCost}
                             setCapitalRepaid={setCapitalRepaid}
+                            ftbCheckBox={ftbCheckBox}
                         />
                     </div>
                     <div className={style.rentSection}>
                         <Renting 
+                            rent={rent}
+                            setRent={setRent}
                             setRentMonthlyCost={setRentMonthlyCost}
                             fixedTerm={fixedTerm}
                             setUpFrontRentCost={setUpFrontRentCost}
@@ -116,6 +136,7 @@ const Calculator = () => {
                             setAer={setAer}
                         />
                     </div>
+                    <Calculations />
                 </div> 
             </section>
             <section className={style.botSpacer}></section>
