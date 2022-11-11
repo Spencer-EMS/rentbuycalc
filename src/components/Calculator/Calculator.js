@@ -7,6 +7,7 @@ import UserInputs from '../UserInputs/UserInputs';
 import Buying from '../Buying/Buying';
 import Renting from '../Renting/Renting';
 import Saving from '../Saving/Saving';
+import Calculations from '../Calculations/Calculations';
 
 const Calculator = () => {
 
@@ -135,6 +136,7 @@ const Calculator = () => {
                             setAer={setAer}
                         />
                     </div>
+                    <Calculations />
                 </div> 
             </section>
             <section className={style.botSpacer}></section>

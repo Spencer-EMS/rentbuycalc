@@ -5,7 +5,7 @@ import style from './NavBar.module.css';
 const NavBar = () => {
     return(
         <div className={style.NavBar}>
-            <h5 className={style.title}>To buy or to rent</h5>
+            <h3 className={style.title}>Rent vs Buy Calculator</h3>
         </div>
     );
 }

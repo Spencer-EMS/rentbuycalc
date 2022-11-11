@@ -175,7 +175,7 @@ const Buying = ({
         <div className={style.Buying}>
             <div className={style.BuyingWrapper}>
                 <div className={style.Buy}>
-                    <h5>Purchase Property</h5>
+                    <h4>Purchase Property</h4>
                     <div className={style.flexNorm}>
                         <p>Property Value:</p>
                         <input type="number" id="pvalue" name="pvalue" value={propValue} readOnly/>

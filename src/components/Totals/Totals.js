@@ -88,7 +88,7 @@ const Totals = ({
     return(
         <div className={style.Totals}>
             <div className={style.fixSideBar}>  
-                <h3>Totals</h3>
+
                 <div className={style.colFlex}>
                     <p>Over:
                         <select id="fterm" name="fterm" defaultValue={fixedTerm} onChange={handleFtermChange} className={style.dropDown}> 
@@ -102,7 +102,10 @@ const Totals = ({
                         </select>
                     </p>
                     <p>{comparisonMessage}</p>
-                    <p>by: <strong>£{equityDelta.toFixed(0)}</strong></p>
+                    <div className={style.flexWrap}>
+                        <p>by:</p>
+                        <h3>£{equityDelta.toFixed(0)}</h3>
+                    </div>
                     <h4>Buying</h4>
                     <p>Upfront costs: £{sumUpFrontCosts.toFixed(0)}</p>
                     <p>Monthly costs: £{sumMonthlyCosts.toFixed(0)}</p>
@@ -111,18 +114,18 @@ const Totals = ({
 
                     <p>Deposit: £{depositAmount.toFixed(0)}</p>
                     <p>Remaining Savings: £{(currentSavings - sumUpFrontCosts - depositAmount).toFixed(0)}</p>
-                    <p>Savings: £{accruedSavingsBuy.toFixed(0)}</p>
+                    <p>Monthly Savings: £{accruedSavingsBuy.toFixed(0)}</p>
                     <p>Capital gains: £{capitalGains.toFixed(0)}</p>
                     <p>Capital repaid: £{capitalRepaid.toFixed(0)}</p>
                     <h5>Equity: £{buyEquity.toFixed(0)}</h5>
                     
                     <h4>Renting</h4>
                     <p>Upfront costs: £{upFrontRentCost}</p>
-                    <p>Monthly costs: £{rentMonthlyCost.toFixed(0)}</p>
+                    <p>Rent paid: £{rentMonthlyCost.toFixed(0)}</p>
                     <h5>Sunk costs: £{(upFrontRentCost + rentMonthlyCost).toFixed(0)}</h5>
                     <p>Security Deposit: £{securityDeposit.toFixed(0)}</p>
                     <p>Remaining Savings: £{(currentSavings - upFrontRentCost - securityDeposit).toFixed(0)}</p>
-                    <p>Savings: £{accruedSavingsRent.toFixed(0)}</p>
+                    <p>Monthly Savings: £{accruedSavingsRent.toFixed(0)}</p>
                     <h5>Equity: £{rentEquity.toFixed(0)}</h5>
                 </div>
             </div>

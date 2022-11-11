@@ -47,7 +47,8 @@ const UpfrontCostsBuy = ({
                     <p>Stamp duty:</p>
                     <div className={style.stampFlex}>
                         <p>First time buyer?</p>
-                        <input type="checkbox" id="ftbCheck" name="ftbCheck" readOnly checked={ftbCheckBox}/>
+                        {ftbCheckBox ? <h5>Yes</h5> : <h5>No</h5>}
+                        {/* <input type="checkbox" id="ftbCheck" name="ftbCheck" readOnly checked={ftbCheckBox}/> */}
                     </div>
                     <input type="number" id="lcost" name="lcost" readOnly value={stampDutyCost.toFixed(0)}/>
                 </div>

@@ -7,12 +7,13 @@ const Introduction = () => {
         <div className={style.Intro}>
             <div className={style.IntroBox}>
                 <p>
-                    When considering whether to rent or buy for your next move, it can be difficult to decypher the numbers.
-                    The rent or buy calculator attempts to simplify this by comparing your final equity position at the end of each scenario.
+                    The rent vs buy calculator compares your net position for each scenario at the end of a selected time period. 
+                    The calculator compares sunk costs (non-recoverable costs eg. rent/interest payments), accrued equity (from mortgage repayments) 
+                    and potential savings returns (from existing and/or monthly savings).
                 </p>
                 <p>
-                    But remember! Long term financial benefit is not the only criteria that should impact your rent or buy decision.
-                    This calculator should be viewed as indicative only.
+                    But remember! Long term financial benefit is not the only criteria that will impact your rent or buy decision.
+                    Please use this calculator as an indicator only when considering your next move.
                 </p>
             </div>
         </div>

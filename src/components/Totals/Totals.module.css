@@ -40,3 +40,13 @@
 .dropDown{
     margin: 0.5rem;
 }
+
+.flexWrap{
+    display: flex;
+    align-items: baseline;
+}
+
+.flexWrap h3{
+    margin: 0 1rem;
+    color: #05a;
+}

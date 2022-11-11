@@ -83,7 +83,7 @@ const Renting = ({
         <div className={style.Renting}>
             <div className={style.RentingWrapper}>
                 <div className={style.Rent}>
-                    <h5>Rental Property</h5>
+                    <h4>Rental Property</h4>
                     <div className={style.flexNorm}>
                         <p>Monthly rent (pcm):</p>
                         <input type="number" id="pvalue" name="pvalue" value={rent} readOnly/>

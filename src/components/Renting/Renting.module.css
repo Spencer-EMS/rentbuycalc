@@ -39,9 +39,10 @@
 }
 
 .Renting h4{
-    all: unset;
-    font-weight: bold;
-    vertical-align: middle;
+    /* all: unset; */
+    /* font-weight: bold; */
+    /* vertical-align: middle; */
+    margin: 0.5rem auto 1rem;
 }
 
 .Renting input {
