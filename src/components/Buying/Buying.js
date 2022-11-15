@@ -26,6 +26,7 @@ const Buying = ({
         setCapitalGains,
         setCapitalRepaid,
         ftbCheckBox,
+        saveBuy,
         setTotalSpendBuy
     }) => {
 
@@ -106,11 +107,11 @@ const Buying = ({
 
     // Total Spend Buy
     useEffect(() => {  
-        const monthlyCosts = (monthlyMaintenance + servCharge + groundRent + mortgagePayment);
+        const monthlyCosts = monthlyMaintenance + servCharge + groundRent + mortgagePayment + saveBuy;
         const costOverTime = (monthlyCosts*(fixedTerm*12));
         const totalSpend = costOverTime + upFrontCosts + depAmount;
         setTotalSpendBuy(totalSpend);
-    }, [monthlyMaintenance, servCharge, groundRent, mortgagePayment, upFrontCosts, depAmount, fixedTerm, setTotalSpendBuy]);
+    }, [saveBuy, monthlyMaintenance, servCharge, groundRent, mortgagePayment, upFrontCosts, depAmount, fixedTerm, setTotalSpendBuy]);
 
     // Monthly Mortgage Payments
     useEffect(() => {
@@ -153,11 +154,6 @@ const Buying = ({
 
 
     // Event handlers
-    // const handlePropValue = event => {
-    //     const newPropValue = parseInt(event.target.value);
-    //     setPropValue(newPropValue);
-    // }
-
     const handleGrowthRateChange = event => {
         const annualRate = parseFloat(event.target.value);
         setGrowthRate(annualRate);
