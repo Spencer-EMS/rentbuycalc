@@ -25,7 +25,8 @@ const Buying = ({
         setTimePeriodCost,
         setCapitalGains,
         setCapitalRepaid,
-        ftbCheckBox
+        ftbCheckBox,
+        setTotalSpendBuy
     }) => {
 
     // input variables 
@@ -51,7 +52,7 @@ const Buying = ({
 
     // Booleans
     const [ addToMortgage, setAddToMortgage ] = useState(true);
-    // const [ ftbCheckBox, setFtbCheckBox ] = useState(false);
+    const [ editBool, setEditBool ] = useState(false);
     
     // Stamp Duty & Deposit
     useEffect(() => {
@@ -103,6 +104,13 @@ const Buying = ({
         setTimePeriodCost(totalBuyCost);
     }, [periodInterestCost, fixedTerm, upFrontCosts, sumMonthlyCosts, setTimePeriodCost]);
 
+    // Total Spend Buy
+    useEffect(() => {  
+        const monthlyCosts = (monthlyMaintenance + servCharge + groundRent + mortgagePayment);
+        const costOverTime = (monthlyCosts*(fixedTerm*12));
+        const totalSpend = costOverTime + upFrontCosts + depAmount;
+        setTotalSpendBuy(totalSpend);
+    }, [monthlyMaintenance, servCharge, groundRent, mortgagePayment, upFrontCosts, depAmount, fixedTerm, setTotalSpendBuy]);
 
     // Monthly Mortgage Payments
     useEffect(() => {
@@ -155,6 +163,10 @@ const Buying = ({
         setGrowthRate(annualRate);
     }
 
+    const handleEditBoolChange = () => {
+        setEditBool(!editBool);
+    }
+
     // Calculations
     const monthlyMortgage = (pValue, iRate, tYears, dep, addFee, feeValue) => {
         var principle = pValue - dep;
@@ -194,27 +206,37 @@ const Buying = ({
                     intRate={intRate}
                     setIntRate={setIntRate}
                 />
-                <UpfrontCostsBuy 
-                    addToMortgage={addToMortgage}
-                    setAddToMortgage={setAddToMortgage}
-                    legalCost={legalCost}
-                    setLegalCost={setLegalCost}
-                    mortFee={mortFee}
-                    setMortFee={setMortFee}
-                    survCost={survCost}
-                    setSurvCost={setSurvCost}
-                    stampDutyCost={stampDutyCost}
-                    ftbCheckBox={ftbCheckBox}
-                />
-                <MonthlyCostsBuy
-                    setMonthlyMaintenance={setMonthlyMaintenance}
-                    setGroundRent={setGroundRent}
-                    setServCharge={setServCharge}
-                    mortgagePayment={mortgagePayment}
-                    monthlyMaintenance={monthlyMaintenance}
-                    servCharge={servCharge}
-                    groundRent={groundRent}
-                />
+                <div className={style.viewBuy}>
+                    <p>Click to edit monthly & upfront costs</p>
+                    <button onClick={handleEditBoolChange}>v</button>
+                </div>
+                {editBool ? 
+                    <>
+                        <UpfrontCostsBuy 
+                            addToMortgage={addToMortgage}
+                            setAddToMortgage={setAddToMortgage}
+                            legalCost={legalCost}
+                            setLegalCost={setLegalCost}
+                            mortFee={mortFee}
+                            setMortFee={setMortFee}
+                            survCost={survCost}
+                            setSurvCost={setSurvCost}
+                            stampDutyCost={stampDutyCost}
+                            ftbCheckBox={ftbCheckBox}
+                        />
+                        <MonthlyCostsBuy
+                            setMonthlyMaintenance={setMonthlyMaintenance}
+                            setGroundRent={setGroundRent}
+                            setServCharge={setServCharge}
+                            mortgagePayment={mortgagePayment}
+                            monthlyMaintenance={monthlyMaintenance}
+                            servCharge={servCharge}
+                            groundRent={groundRent}
+                        />
+                    </>
+                :
+                <></>
+                }
             </div>
         </div>
     );

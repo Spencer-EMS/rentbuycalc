@@ -34,6 +34,7 @@ const Calculator = () => {
     // Totals
 
     // BUY
+    const [ totalSpendBuy, setTotalSpendBuy ] = useState(0);
     const [ upFrontCosts, setUpFrontCosts ] = useState(0);
     const [ sumMonthlyCosts, setSumMonthlyCosts ] = useState(0);
     const [ timePeriodCost, setTimePeriodCost ] = useState(0);
@@ -56,7 +57,8 @@ const Calculator = () => {
     return(
         <>
             <section className={style.Calculator}>
-                <Totals 
+                <Totals
+                    totalSpendBuy={totalSpendBuy}
                     currentSavings={currentSavings}
                     depositAmount={depAmount} 
                     stampDuty={stampDutyCost}
@@ -110,6 +112,7 @@ const Calculator = () => {
                             periodInterestCost={periodInterestCost}
                             setCapitalRepaid={setCapitalRepaid}
                             ftbCheckBox={ftbCheckBox}
+                            setTotalSpendBuy={setTotalSpendBuy}
                         />
                     </div>
                     <div className={style.rentSection}>
@@ -130,7 +133,7 @@ const Calculator = () => {
                             setSaveBuy={setSaveBuy}
                             saveRent={saveRent}
                             setSaveRent={setSaveRent}
-                            rentMonthlyCost={rentMonthlyCost}
+                            rent={rent}
                             buyMonthlyCost={buyMonthlyCost}
                             aer={aer}
                             setAer={setAer}

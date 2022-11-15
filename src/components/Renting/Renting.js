@@ -3,7 +3,6 @@ import style from './Renting.module.css';
 
 const Renting = ({
     rent,
-    setRent,
     setRentMonthlyCost,
     fixedTerm,
     setUpFrontRentCost,

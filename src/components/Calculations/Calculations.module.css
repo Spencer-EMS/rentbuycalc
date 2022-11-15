@@ -20,6 +20,12 @@
     margin: 0 auto 1rem;
 }
 
+.flexWrapEquity{
+    display: flex;
+    margin: auto;
+    justify-content: space-around;
+}
+
 .flexWrap{
     display: flex;
     /* justify-content: space-around; */
@@ -55,10 +61,17 @@
 }
 
 .midBorder{
-    height: 0.12rem;
+    height: 0.06rem;
     background-color: black;
     margin: 2rem;
 }
+
+.midBorderGrey{
+    height: 0.06rem;
+    background-color: grey;
+    margin: 2rem;
+}
+
 
 .flexBen{
     display: flex;

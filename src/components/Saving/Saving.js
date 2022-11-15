@@ -7,7 +7,7 @@ const Saving = ({
     setSaveBuy,
     saveRent,
     setSaveRent,
-    rentMonthlyCost,
+    rent,
     buyMonthlyCost,
     aer,
     setAer
@@ -17,7 +17,7 @@ const Saving = ({
 
     // Calculating monthly cost delta
     useEffect(() => {
-        const delta = (rentMonthlyCost/(fixedTerm*12)) - buyMonthlyCost;
+        const delta = (rent - buyMonthlyCost);
         if (delta > 0) {
             setMonthlyDelta(delta);
             setSaveBuy(delta);
@@ -30,7 +30,7 @@ const Saving = ({
             setSaveRent((delta*(-1)));
             setSaveBuy(0);
         }   
-    }, [ fixedTerm, setMonthlyDelta, rentMonthlyCost, buyMonthlyCost, setSaveBuy, setSaveRent]);
+    }, [ fixedTerm, setMonthlyDelta, rent, buyMonthlyCost, setSaveBuy, setSaveRent]);
 
 
     // Event handlers
@@ -54,7 +54,7 @@ const Saving = ({
         <div className={style.Saving}>
             <div className={style.SavingWrapper}>
                 <h4>Saving</h4>
-                <p>Buying PCM: £{buyMonthlyCost} || Rent PCM: £{(rentMonthlyCost/(fixedTerm*12)).toFixed(0)}</p>
+                <p>Buying PCM: £{buyMonthlyCost} || Rent PCM: £{rent.toFixed(0)}</p>
                 <p>the difference is £{monthlyDelta.toFixed(0)}</p>
                 <p>How much will you be saving per month, whilst buying/renting?</p>
                 <div className={style.flexNorm}>

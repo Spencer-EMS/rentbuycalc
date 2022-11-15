@@ -41,7 +41,7 @@ const Calculations = () => {
                     </div>
                 </div>
 
-                <div className={style.midBorder}></div>
+                <div className={style.midBorderGrey}></div>
 
                 <div className={style.flexBen}>
                     <h6>Benefits</h6>
@@ -77,7 +77,16 @@ const Calculations = () => {
                     </div>
                 </div>
 
-                <div className={style.spacer}></div>
+                <div className={style.midBorderGrey}></div>
+
+                <div className={style.flexWrapEquity}>
+                    <p>Equity:</p>
+                    <p></p>
+                </div>
+
+                <div className={style.midBorder}></div>
+
+                {/* <div className={style.spacer}></div> */}
 
                 <h5>Renting</h5>
                 <div className={style.flexCost}>
@@ -107,7 +116,7 @@ const Calculations = () => {
                     </div>
                 </div>
 
-                <div className={style.midBorder}></div>
+                <div className={style.midBorderGrey}></div>
 
                 <div className={style.flexBen}>
                     <h6>Benefits</h6>
