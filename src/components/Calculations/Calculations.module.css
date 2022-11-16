@@ -30,7 +30,7 @@
     display: flex;
     /* justify-content: space-around; */
     /* margin: auto; */
-    width: 29rem;
+    width: 28rem;
     justify-content: space-between;
     align-items: bottom;
     text-align: left;
@@ -39,6 +39,39 @@
 .flexWrap p{
     margin: 1rem;
     min-width: 4rem;
+}
+
+.flexWrapInt{
+    display: flex;
+    /* justify-content: space-around; */
+    /* margin: auto; */
+    width: 28rem;
+    justify-content: space-between;
+    align-items: bottom;
+    text-align: left;
+}
+
+.intTitle{
+    margin: 1rem 0 1rem 1rem;
+    min-width: 4rem;
+}
+
+
+.flexWrapSunk{
+    display: flex;
+    width: 26.5rem;
+    justify-content: space-between;
+    align-items: bottom;
+    text-align: left;
+    background-color: whitesmoke;
+    border: 4px solid white;
+}
+
+.flexWrapSunk p{
+    margin: 0;
+    min-width: 4rem;
+    padding: 0.5rem;
+    border: 6px solid white;
 }
 
 .flexCost{
@@ -64,6 +97,19 @@
     height: 0.06rem;
     background-color: black;
     margin: 2rem;
+}
+
+.midBorder1{
+    height: 0.06rem;
+    background-color: #05a;
+    margin: 2rem 2rem 0.4rem;
+}
+
+
+.midBorder2{
+    height: 0.06rem;
+    background-color: #05a;
+    margin: 0 2rem;
 }
 
 .midBorderGrey{
@@ -92,6 +138,40 @@
     border-left: 2px solid #95bb72;
 }
 
+.colFlexBlue{
+    display: flex;
+    flex-direction: column;
+    border-left: 2px solid #81d4fa;
+}
+
 .spacer{
     height: 3rem;
 }
+
+.flexWrapSpendBuy{
+    display: flex;
+    margin: auto 2rem;
+    justify-content: space-around;
+    
+}
+
+.flexWrapSpendBuy p{
+    margin: 0 1rem;
+}
+
+.netPosition{
+    /* background-color: #deeff5; */
+    border-left: 2px solid #05A;
+    display: flex;
+    margin: 0 2rem;
+    padding: 1rem;
+    justify-content: space-around;
+    /* opacity: 0.1; */
+    /* color: white; */
+}
+
+
+.netPosition p{
+    width: 18rem;
+}
+
