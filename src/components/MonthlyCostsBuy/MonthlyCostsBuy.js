@@ -51,6 +51,7 @@ const MonthlyCostsBuy = ({
                     <input type="number" id="scharge" name="scharge" defaultValue={servCharge} onChange={handleServChargeChange}/>
                 </div>
             </div>
+            <div className={style.spacer}></div>
         </>
     );
 }

@@ -3,12 +3,14 @@ import style from './Renting.module.css';
 
 const Renting = ({
     rent,
-    setRent,
+    currentSavings,
+    saveRent,
     setRentMonthlyCost,
     fixedTerm,
     setUpFrontRentCost,
     securityDeposit,
-    setSecurityDeposit
+    setSecurityDeposit,
+    setTotalSpendRent
 }) => {
 
     const [ refCost, setRefCost ] = useState(((1*199)*1.2).toFixed(2));
@@ -38,16 +40,22 @@ const Renting = ({
        ]
     );
 
-    useEffect(() => { // upFront Costs
-        var initialCost = parseInt(adminCost)+parseInt(refCost)+parseInt(securityDeposit);
+    useEffect(() => { // upFront Costs (does not inc. security deposit)
+        const initialCost = parseInt(adminCost)+parseInt(refCost);
         setUpFrontRentCost(initialCost);
-    }, [adminCost, refCost, securityDeposit, setUpFrontRentCost]);
+    }, [adminCost, refCost, setUpFrontRentCost]);
 
     useEffect(() => { // Security deposit
         const weeklyRent = (rent*12)/52;
         const secDeposit = weeklyRent*depWeeks;
         setSecurityDeposit(secDeposit);
     }, [rent, depWeeks, setSecurityDeposit]);
+
+    useEffect(() => { // TotalSpend Rent - This is the initial spend for the ROI formula
+        const totalSpend = (rent*(fixedTerm*12))+parseInt(adminCost)+parseInt(refCost)+parseInt(securityDeposit);
+        const totalSpentSaved = totalSpend + currentSavings + (saveRent*(fixedTerm*12));
+        setTotalSpendRent(totalSpentSaved);
+    }, [rent, currentSavings, saveRent, fixedTerm, adminCost, refCost, securityDeposit, setTotalSpendRent]);
 
     // const handleRentChange = event => {
     //     const monthlyRent = parseInt(event.target.value);

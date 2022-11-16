@@ -14,11 +14,18 @@
 
 .Totals h4{
     text-align: left;
+    margin: 1rem 0 0.4rem 0;
 }
 
 .Totals h5{
     text-align: left;
-    margin: 0.5rem 0;
+    margin: 0.4rem 0;
+}
+
+.Totals h6{
+    text-align: left;
+    margin: 0.2rem 0 0.4rem;
+    font-size: 0.8rem;
 }
 
 .Totals p{
