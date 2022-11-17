@@ -1,7 +1,8 @@
 import './App.css';
+import { connect } from 'react-redux';
 
 import NavBar from './components/NavBar/NavBar';
-import Calculator from './components/Calculator/Calculator';
+import Calculator from './containers/Calculator/Calculator';
 
 function App() {
   return (
@@ -12,4 +13,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(store=>store)(App);

@@ -54,7 +54,7 @@ const Saving = ({
         <div className={style.Saving}>
             <div className={style.SavingWrapper}>
                 <h4>Saving</h4>
-                <p>Buying PCM: £{buyMonthlyCost} || Rent PCM: £{rent.toFixed(0)}</p>
+                <p>Buying PCM: £{buyMonthlyCost.toFixed(0)} || Rent PCM: £{rent.toFixed(0)}</p>
                 <p>the difference is £{monthlyDelta.toFixed(0)}</p>
                 <p>How much will you be saving per month, whilst buying/renting?</p>
                 <div className={style.flexNorm}>
