@@ -154,3 +154,5 @@ const Calculator = () => {
 }
 
 export default Calculator;
+
+export { Totals, UserInputs, Buying, Renting, Saving };
