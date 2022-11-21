@@ -57,11 +57,7 @@ const Renting = ({
         setTotalSpendRent(totalSpentSaved);
     }, [rent, currentSavings, saveRent, fixedTerm, adminCost, refCost, securityDeposit, setTotalSpendRent]);
 
-    // const handleRentChange = event => {
-    //     const monthlyRent = parseInt(event.target.value);
-    //     setRent(monthlyRent);   
-    // }
-
+    // Event handlers
     const handleRentIncreaseChange = event => {
         const rentInc = parseFloat(event.target.value);
         setRentIncrease(rentInc);

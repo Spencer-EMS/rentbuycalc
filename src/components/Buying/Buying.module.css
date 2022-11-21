@@ -87,15 +87,38 @@
     height: 1.2rem;
     width: 1.2rem;
     text-align: middle;
-    /* transition: all 0.3s ease 0s; */
+    transition: all 0.2s ease 0s;
     cursor: pointer;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 }
-/* 
-.viewBuy button:hover {
-    background-color: #2EE59D;
-    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
-    color: #fff;
+
+.closeBuy{
+    display: flex;
+    height: 2rem;
+    justify-content: space-around;
+    align-items: center;
+    margin: 1rem auto;
+}
+
+.closeBuy p{
+    font-size: 0.8rem;
+}
+
+.closeBuy button {
+    all: unset;
+    margin: 1rem;
+    padding: 0.5rem;
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
+    height: 1.2rem;
+    width: 1.2rem;
+    text-align: middle;
+    transition: all 0.2s ease 0s;
+    cursor: pointer;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    background-color: #05A;
+    /* box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4); */
     transform: translateY(-4px);
     transform: rotate(180deg);
-  } */
+  }

@@ -1,6 +1,15 @@
-import React, { useState, useEffect } from 'react';
 
+// Libraries
+import React, { useState, useEffect } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+
+// Styling
 import style from './Buying.module.css';
+
+// Functions
+import calculateStampDuty from '../../functions/calculateStampDuty/calculateStampDuty';
+import calculateMortPrinciple from '../../functions/calculateMortPrinciple/calculateMortPrinciple';
+import calculateMonthlyMortPayment from '../../functions/calculateMonthlyMortPayment/calculateMonthlyMortPayment';
 
 // Components
 import Mortgage from '../Mortgage/Mortgage';
@@ -30,8 +39,7 @@ const Buying = ({
         setTotalSpendBuy
     }) => {
 
-    // input variables 
-    // const [ propValue, setPropValue ] = useState(250000);
+    // input variables
     const [ growthRate, setGrowthRate ] = useState(3);
     const [ depPercent, setDepPercent ] = useState(10);
     const [ mortTerm, setMortTerm ] = useState(25);
@@ -57,39 +65,11 @@ const Buying = ({
     
     // Stamp Duty & Deposit
     useEffect(() => {
-        // console.log("SDLT useeffect", ftbCheckBox);
         setDepAmount(propValue*(depPercent/100));
-        var test1 = propValue-(propValue*(depPercent/100));
-        setMortPrinciple(test1);
-        const stampDuty = (value, ftbBool) => {
-            var sdltTotal;
-            if (ftbBool === false) {
-                if (value <= 250000) {
-                    sdltTotal = 0;
-                } else if (value >= 250001 && value <= 925000) {
-                    sdltTotal = (value - 250000)*0.05;
-                } else if (value >= 925001 && value <= 1499999) {
-                    sdltTotal = ((value - 925001)*0.1)+(675000*0.05);
-                } else {
-                    sdltTotal = ((value - 1499999)*0.12)+((value - 925001)*0.1)+(675000*0.05);
-                }
-                setStampDutyCost(sdltTotal);
-            } else if (ftbBool !== false) {
-                if (value <= 425000) {
-                    sdltTotal = 0;
-                } else if (value >= 425000 && value <= 625000) {
-                    sdltTotal = (value - 425000)*0.05;
-                } else if (value >= 625001 && value <= 925000) {
-                    sdltTotal = (value - 250000)*0.05;
-                } else if (value >= 925001 && value <= 1499999) {
-                    sdltTotal = ((value - 925001)*0.1)+(675000*0.05);
-                } else {
-                    sdltTotal = ((value - 1499999)*0.12)+((value - 925001)*0.1)+(675000*0.05);
-                }
-                setStampDutyCost(sdltTotal);
-            }
-        }
-        stampDuty(propValue, ftbCheckBox);
+        var mortgagePrinciple = propValue-(propValue*(depPercent/100));
+        setMortPrinciple(mortgagePrinciple);
+        const stampDuty = calculateStampDuty(propValue, ftbCheckBox, setStampDutyCost);
+        setStampDutyCost(stampDuty);
     }, [propValue, depPercent, ftbCheckBox, setDepAmount, setStampDutyCost]);
 
     // Calculating Interest Cost across the time period [Formula: A=(P(1+r/n)^nt)-P]
@@ -116,7 +96,10 @@ const Buying = ({
     // Monthly Mortgage Payments
     useEffect(() => {
         const calcDeposit = propValue*(depPercent/100);
-        monthlyMortgage(propValue, intRate, mortTerm, calcDeposit, addToMortgage, mortFee);
+        const monthlyPayment = calculateMonthlyMortPayment(propValue, intRate, mortTerm, calcDeposit, addToMortgage, mortFee);
+        const principle = calculateMortPrinciple(propValue, calcDeposit, addToMortgage, mortFee);
+        setMortgagePayment(monthlyPayment);
+        setMortPrinciple(principle);
     }, [propValue, depPercent, intRate, mortTerm, addToMortgage, mortFee]);
     
     // Totals
@@ -164,19 +147,30 @@ const Buying = ({
     }
 
     // Calculations
-    const monthlyMortgage = (pValue, iRate, tYears, dep, addFee, feeValue) => {
-        var principle = pValue - dep;
-        if (addFee !== false) {
-            principle = principle + feeValue;
-        }
-        const int = (iRate/100)/12;
-        const nMonths = tYears*12;
-        const intOne = int + 1;
-        var monthlyPayment = (((Math.pow(intOne, nMonths))*int)/((Math.pow(intOne, nMonths))-1))*principle;
-        monthlyPayment = parseInt(monthlyPayment);
-        setMortgagePayment(monthlyPayment);
-        setMortPrinciple(principle);
-    }
+    
+    // Monthly mortgage repayment M = P [ i(1 + i)^n ] / [ (1 + i)^n – 1]
+    // const calculateMonthlyMortPayment = (pValue, iRate, tYears, dep, addFee, feeValue) => {
+    //     var principle = pValue - dep;
+    //     if (addFee !== false) {
+    //         principle = principle + feeValue;
+    //     }
+    //     const int = (iRate/100)/12;
+    //     const nMonths = tYears*12;
+    //     const intOne = int + 1;
+    //     const numerator = (int*(intOne**nMonths));
+    //     const denominator = ((int + 1)**(nMonths)-1);
+    //     var monthlyPayment = principle*(numerator/denominator);
+    //     return monthlyPayment;
+    // }
+
+    // const calculateMortPrinciple = (pValue, dep, addFee, feeValue) => {
+    //     var principle = pValue - dep;
+    //     if (addFee !== false) {
+    //         principle = principle + feeValue;
+    //     }
+    //     return principle;
+    // }
+
 
     // VIEW
     return(
@@ -202,7 +196,7 @@ const Buying = ({
                     intRate={intRate}
                     setIntRate={setIntRate}
                 />
-                <div className={style.viewBuy}>
+                <div className={editBool ? style.closeBuy : style.viewBuy }>
                     <p>Click to edit monthly & upfront costs</p>
                     <button onClick={handleEditBoolChange}>v</button>
                 </div>
@@ -239,3 +233,57 @@ const Buying = ({
 }
 
 export default Buying;
+
+// Duplicate non-exported functions for testing only !!! Ensure to replicate all changes to both Test & non-Test function //
+
+export const calculateMonthlyMortPaymentTest = (pValue, iRate, tYears, dep, addFee, feeValue) => {
+    var principle = pValue - dep;
+    if (addFee !== false) {
+        principle = principle + feeValue;
+    }
+    const int = (iRate/100)/12;
+    const nMonths = tYears*12;
+    const intOne = int + 1;
+    const numerator = (int*(intOne**nMonths));
+    const denominator = (((int + 1)**(nMonths))-1);
+    var monthlyPayment = principle*(numerator/denominator);
+    monthlyPayment = parseInt(monthlyPayment);
+    return monthlyPayment;
+}
+
+export const calculateMortPrincipleTest = (pValue, dep, addFee, feeValue) => {
+    var principle = pValue - dep;
+    if (addFee !== false) {
+        principle = principle + feeValue;
+    }
+    return principle;
+}
+
+export const calculateStampDutyTest = (value, ftbBool) => {
+    var sdltTotal;
+    if (ftbBool === false) {
+        if (value <= 250000) {
+            sdltTotal = 0;
+        } else if (value >= 250001 && value <= 925000) {
+            sdltTotal = (value - 250000)*0.05;
+        } else if (value >= 925001 && value <= 1499999) {
+            sdltTotal = ((value - 925001)*0.1)+(675000*0.05);
+        } else {
+            sdltTotal = ((value - 1499999)*0.12)+((value - 925001)*0.1)+(675000*0.05);
+        }
+        return(sdltTotal);
+    } else if (ftbBool !== false) {
+        if (value <= 425000) {
+            sdltTotal = 0;
+        } else if (value >= 425001 && value <= 625000) {
+            sdltTotal = (value - 425000)*0.05;
+        } else if (value >= 625001 && value <= 925000) {
+            sdltTotal = (value - 250000)*0.05;
+        } else if (value >= 925001 && value <= 1499999) {
+            sdltTotal = ((value - 925001)*0.1)+(675000*0.05);
+        } else {
+            sdltTotal = ((value - 1499999)*0.12)+((value - 925001)*0.1)+(675000*0.05);
+        }
+        return(sdltTotal);
+    }
+}

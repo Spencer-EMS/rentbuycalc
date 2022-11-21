@@ -26,7 +26,7 @@ const UserInputs = ({
 
     // const dispatch = useDispatch();
     
-    // const reduxTest = useSelector(state => state.propertyValue);
+    // const propertyValueTest = useSelector(state => state.propertyValue);
 
     // Event handlers
     const handleSavingsChange = (event) => {
@@ -35,7 +35,12 @@ const UserInputs = ({
     }
 
     // const handlePropertyValueChange = (event) => {
-    //     dispatch({ type: 'changePropValue', value: event.target.value});
+    //     const userInput = parseInt(event.target.value);
+    //     const action = {
+    //         type:'SET_VALUE',
+    //         propertyValue: userInput
+    //     }
+    //     dispatch(action);
     // }
 
     const handleRentChange = event => {

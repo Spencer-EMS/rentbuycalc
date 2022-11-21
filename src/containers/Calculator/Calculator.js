@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import style from './Calculator.module.css';
 
-import Totals from '../Totals/Totals';
-import Introduction from '../Introduction/Introduction';
-import UserInputs from '../UserInputs/UserInputs';
-import Buying from '../Buying/Buying';
-import Renting from '../Renting/Renting';
-import Saving from '../Saving/Saving';
-import Calculations from '../Calculations/Calculations';
+import Totals from '../../components/Totals/Totals';
+import Introduction from '../../components/Introduction/Introduction';
+import UserInputs from '../../components/UserInputs/UserInputs';
+import Buying from '../../components/Buying/Buying';
+import Renting from '../../components/Renting/Renting';
+import Saving from '../../components/Saving/Saving';
+import Calculations from '../../components/Calculations/Calculations';
 
 const Calculator = () => {
 
@@ -154,3 +154,5 @@ const Calculator = () => {
 }
 
 export default Calculator;
+
+export { Totals, UserInputs, Buying, Renting, Saving };

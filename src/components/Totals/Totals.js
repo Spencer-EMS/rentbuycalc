@@ -49,7 +49,9 @@ const Totals = ({
     useEffect(() => { 
         var accruedAmount;
         const remainingSavings = currentSavings - sumUpFrontCosts - depositAmount;
+        // console.log("remainingSavings", remainingSavings);
         accruedAmount = remainingSavings*((1+((aer/100)/12))**(12*fixedTerm));
+        // console.log("accruedAmount", accruedAmount);
         const interestEarned = accruedAmount - remainingSavings;
         var rOverN = (aer/100)/12;
         var numerator = (saveBuy*(((1+(rOverN))**(12*fixedTerm))-1));
@@ -161,7 +163,7 @@ const Totals = ({
                     <p>Capital gains: £{capitalGains.toFixed(0)}</p>
                     <h6>Equity: £{buyEquity.toFixed(0)}</h6>
 
-                    <p>Amount saved: £{((currentSavings - upFrontRentCost - securityDeposit)+(saveBuy*(fixedTerm*12))).toFixed(0)}</p>
+                    <p>Amount saved: £{((currentSavings - sumUpFrontCosts - depositAmount)+(saveBuy*(fixedTerm*12))).toFixed(0)}</p>
                     <p>Interest earned: £{buyInterestEarned.toFixed(0)}</p>
                     <h6>Total Savings: £{accruedSavingsBuy.toFixed(0)}</h6>
                     <p>Total spend: £{totalSpendBuy.toFixed(0)}</p>
