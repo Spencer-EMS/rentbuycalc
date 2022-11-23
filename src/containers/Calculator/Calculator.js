@@ -8,6 +8,7 @@ import Buying from '../../components/Buying/Buying';
 import Renting from '../../components/Renting/Renting';
 import Saving from '../../components/Saving/Saving';
 import Calculations from '../../components/Calculations/Calculations';
+import SideNav from '../../components/SideNav/SideNav';
 
 const Calculator = () => {
 
@@ -147,6 +148,7 @@ const Calculator = () => {
                     </div>
                     <Calculations />
                 </div> 
+                <SideNav />
             </div>
             <div className={style.botSpacer}></div>
         </section>
