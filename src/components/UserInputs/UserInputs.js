@@ -30,7 +30,7 @@ const UserInputs = ({
 
     // Event handlers
     const handleSavingsChange = (event) => {
-        const savings = event.target.value;
+        const savings = parseInt(event.target.value);
         setCurrentSavings(savings);
     }
 
@@ -45,7 +45,7 @@ const UserInputs = ({
 
     const handleRentChange = event => {
         const monthlyRent = parseInt(event.target.value);
-        setRent(monthlyRent);   
+        setRent(monthlyRent);
     }
 
     // VIEW

@@ -56,8 +56,8 @@ const Calculator = () => {
     const [ accruedSavingsBuy, setAccruedSavingsBuy ] = useState(0);
 
     return(
-        <>
-            <section className={style.Calculator}>
+        <section className={style.Calculator}>
+            <div className={style.buyingFlex}>
                 <Totals
                     totalSpendBuy={totalSpendBuy}
                     currentSavings={currentSavings}
@@ -132,7 +132,7 @@ const Calculator = () => {
                             setTotalSpendRent={setTotalSpendRent}
                         />
                     </div>
-                    <div>
+                    <div className={style.saveSection}>
                         <Saving
                             fixedTerm={fixedTerm}
                             saveBuy={saveBuy}
@@ -147,9 +147,9 @@ const Calculator = () => {
                     </div>
                     <Calculations />
                 </div> 
-            </section>
-            <section className={style.botSpacer}></section>
-        </>
+            </div>
+            <div className={style.botSpacer}></div>
+        </section>
     );
 }
 

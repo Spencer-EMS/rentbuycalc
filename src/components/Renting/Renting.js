@@ -91,7 +91,7 @@ const Renting = ({
                     <div className={style.flexNorm}>
                         <p>Monthly rent (pcm):</p>
                         <input type="number" id="pvalue" name="pvalue" value={rent} readOnly/>
-                        <p>Annual rent increase:</p>
+                        <p>Annual rent increase (%):</p>
                         <input type="number" id="rinc" name="rinc" defaultValue={rentIncrease} onChange={handleRentIncreaseChange}/>
                     </div>
                 </div>

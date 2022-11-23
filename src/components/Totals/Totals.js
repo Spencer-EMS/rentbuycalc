@@ -36,6 +36,8 @@ const Totals = ({
     const [ equityDelta, setEquityDelta ] = useState(0);
     const [ rentInterestEarned, setRentInterestEarned ] = useState(0);
     const [ buyInterestEarned, setBuyInterestEarned ] = useState(0);
+    const [ buyAmountSaved, setBuyAmountSaved ] = useState(0);
+    const [ rentAmountSaved, setRentAmountSaved ] = useState(0);
 
     // TESTING
     // const [ buyRoi, setBuyRoi ] = useState(0);
@@ -85,6 +87,11 @@ const Totals = ({
         setBuyEquity(totalBuyEquity);
     }, [depositAmount, currentSavings, sumUpFrontCosts, accruedSavingsBuy, capitalGains, capitalRepaid]);
 
+    useEffect(() => { // Buy Amount Saved
+        const buyAmountSaved = (currentSavings - sumUpFrontCosts - depositAmount)+(saveBuy*(fixedTerm*12));
+        setBuyAmountSaved(buyAmountSaved);
+    }, [depositAmount, currentSavings, sumUpFrontCosts, saveBuy, fixedTerm]);
+
     useEffect(() => { // Net Position Buy 
         const netPosition = ((depositAmount + capitalGains + capitalRepaid) + accruedSavingsBuy);
         setNetPositionBuy(netPosition);
@@ -94,6 +101,11 @@ const Totals = ({
         const netGainLoss = ( netPositionBuy - totalSpendBuy );
         setNetGainBuy(netGainLoss);
     }, [totalSpendBuy, netPositionBuy, setNetGainBuy]);
+
+    useEffect(() => { // Rent Amount Saved
+        const rentAmountSaved = (currentSavings - upFrontRentCost - securityDeposit)+(saveRent*(fixedTerm*12));
+        setRentAmountSaved(rentAmountSaved);
+    }, [currentSavings, upFrontRentCost, securityDeposit, saveRent, fixedTerm]);
 
     useEffect(() => { // Net Position Rent 
         const netPosition = ((securityDeposit) + accruedSavingsRent);
@@ -148,44 +160,234 @@ const Totals = ({
                     <p>{comparisonMessage}</p>
                     <div className={style.flexWrap}>
                         <p>by:</p>
-                        <h3>£{equityDelta.toFixed(0)}</h3>
+                        <h3>{new Intl.NumberFormat('gb-GB', { style: 'currency', currency: 'GBP' }).format(equityDelta)}</h3>
                     </div>
+
                     <h4>Buying</h4>
                     
-                    <p>Upfront costs: £{sumUpFrontCosts.toFixed(0)}</p>
-                    <p>Monthly costs: £{sumMonthlyCosts.toFixed(0)}</p>
-                    <p>Interest cost: £{periodInterestCost.toFixed(0)}</p>
-                    <h6>Sunk costs: £{buyTotalCost.toFixed(0)}</h6>
+                    <p>Upfront costs: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            {
+                                style: 'currency', 
+                                currency: 'GBP', 
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 0 
+                            }
+                        ).format(sumUpFrontCosts)}
+                    </p>
+                    <p>Monthly costs: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency', 
+                                currency: 'GBP', 
+                                minimumFractionDigits: 0, 
+                                maximumFractionDigits: 0 
+                            }
+                        ).format(sumMonthlyCosts)}
+                    </p>
+                    <p>Interest cost: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency', 
+                                currency: 'GBP', 
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 0 
+                            }
+                        ).format(periodInterestCost)}
+                    </p>
+                    <h6>Sunk costs: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            {  
+                                style: 'currency', 
+                                currency: 'GBP' 
+                            }
+                        ).format(buyTotalCost)}
+                    </h6>
 
-                    <p>Deposit: £{depositAmount.toFixed(0)}</p>
-                    {/* <p>Remaining Savings: £{(currentSavings - sumUpFrontCosts - depositAmount).toFixed(0)}</p> */}
-                    <p>Capital repaid: £{capitalRepaid.toFixed(0)}</p>
-                    <p>Capital gains: £{capitalGains.toFixed(0)}</p>
-                    <h6>Equity: £{buyEquity.toFixed(0)}</h6>
+                    <p>Deposit: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency', 
+                                currency: 'GBP', 
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 0 
+                            }
+                        ).format(depositAmount)}
+                    </p>
+                    <p>Capital repaid: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency', 
+                                currency: 'GBP', 
+                                minimumFractionDigits: 0, 
+                                maximumFractionDigits: 0 
+                            }
+                        ).format(capitalRepaid)}
+                    </p>
+                    <p>Capital gains: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency', 
+                                currency: 'GBP', 
+                                minimumFractionDigits: 0, 
+                                maximumFractionDigits: 0 
+                            }
+                        ).format(capitalGains)}
+                    </p>
+                    <h6>Equity: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency', 
+                                currency: 'GBP' 
+                            }
+                        ).format(buyEquity)}
+                    </h6>
 
-                    <p>Amount saved: £{((currentSavings - sumUpFrontCosts - depositAmount)+(saveBuy*(fixedTerm*12))).toFixed(0)}</p>
-                    <p>Interest earned: £{buyInterestEarned.toFixed(0)}</p>
-                    <h6>Total Savings: £{accruedSavingsBuy.toFixed(0)}</h6>
-                    <p>Total spend: £{totalSpendBuy.toFixed(0)}</p>
-                    <p>Net position: £{netPositionBuy.toFixed(0)}</p>
-                    <h5>Net gain/loss: £{netGainBuy.toFixed(0)}</h5>
+                    <p>Amount saved: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency', 
+                                currency: 'GBP', 
+                                minimumFractionDigits: 0, 
+                                maximumFractionDigits: 0 
+                            }
+                        ).format(buyAmountSaved)}
+                    </p>
+                    <p>Interest earned: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            {
+                                style: 'currency', 
+                                currency: 'GBP', 
+                                minimumFractionDigits: 0, 
+                                maximumFractionDigits: 0 
+                            }
+                        ).format(buyInterestEarned)}
+                    </p>
+                    <h6>Total Savings: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency',
+                                currency: 'GBP' 
+                            }
+                        ).format(accruedSavingsBuy)}
+                    </h6>
+
+                    <p>Total spend: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency', 
+                                currency: 'GBP', 
+                                minimumFractionDigits: 0, 
+                                maximumFractionDigits: 0 
+                            }
+                        ).format(totalSpendBuy)}
+                    </p>
+                    <p>Net position: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency', 
+                                currency: 'GBP', 
+                                minimumFractionDigits: 0, 
+                                maximumFractionDigits: 0 
+                            }
+                        ).format(netPositionBuy)}
+                    </p>
+                    <h6>Net gain/loss: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency', 
+                                currency: 'GBP' 
+                            }
+                        ).format(netGainBuy)}
+                    </h6>
                     
                     <h4>Renting</h4>
                     
-                    <p>Upfront costs: £{upFrontRentCost}</p>
-                    <p>Rent paid: £{rentMonthlyCost.toFixed(0)}</p>
-                    <h5>Sunk costs: £{(upFrontRentCost + rentMonthlyCost).toFixed(0)}</h5>
+                    <p>Upfront costs: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency', 
+                                currency: 'GBP', 
+                                minimumFractionDigits: 0, 
+                                maximumFractionDigits: 0 
+                            }
+                        ).format(upFrontRentCost)}
+                    </p>
+                    <p>Rent paid: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency', 
+                                currency: 'GBP', 
+                                minimumFractionDigits: 0, 
+                                maximumFractionDigits: 0 
+                            }
+                        ).format(rentMonthlyCost)}
+                    </p>
+                    <h6>Sunk costs: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            {
+                                style: 'currency', 
+                                currency: 'GBP' 
+                            }
+                        ).format((upFrontRentCost + rentMonthlyCost))}
+                    </h6>
+                    <p>Amount saved: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency', 
+                                currency: 'GBP', 
+                                minimumFractionDigits: 0, 
+                                maximumFractionDigits: 0 
+                            }
+                        ).format(rentAmountSaved)}
+                    </p>
+                    <p>Interest earned: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency', 
+                                currency: 'GBP', 
+                                minimumFractionDigits: 0, 
+                                maximumFractionDigits: 0 
+                            }
+                        ).format(rentInterestEarned)}
+                    </p>
+                    <h6>Total savings: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency', 
+                                currency: 'GBP' 
+                            }
+                        ).format(accruedSavingsRent)}
+                    </h6>
 
-                    
-                    {/* <p>Remaining Savings: £{(currentSavings - upFrontRentCost - securityDeposit).toFixed(0)}</p> */}
-                    <p>Amount saved: £{((currentSavings - upFrontRentCost - securityDeposit)+(saveRent*(fixedTerm*12))).toFixed(0)}</p>
-                    <p>Interest earned: £{rentInterestEarned.toFixed(0)}</p>
-                    <h6>Total savings: £{accruedSavingsRent.toFixed(0)}</h6>
-                    {/* <p>Security deposit: £{securityDeposit.toFixed(0)}</p> */}
-                    <p>Total Spend: £{totalSpendRent.toFixed(0)}</p>
-                    <p>Net position: £{netPositionRent.toFixed(0)}</p>
-                    <h5>Net gain/loss: £{netGainRent.toFixed(0)}</h5>
-                    
+                    <p>Total Spend: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency', 
+                                currency: 'GBP', 
+                                minimumFractionDigits: 0, 
+                                maximumFractionDigits: 0 
+                            }
+                        ).format(totalSpendRent)}
+                    </p>
+                    <p>Net position: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency', 
+                                currency: 'GBP', 
+                                minimumFractionDigits: 0, 
+                                maximumFractionDigits: 0 
+                            }
+                        ).format(netPositionRent)}
+                    </p>
+                    <h6>Net gain/loss: 
+                        {new Intl.NumberFormat('gb-GB', 
+                            { 
+                                style: 'currency', 
+                                currency: 'GBP' 
+                            }
+                        ).format(netGainRent)}
+                    </h6>
                 </div>
             </div>
         </div>
