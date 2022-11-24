@@ -1,16 +1,12 @@
 .Calculator {
     display: flex;
     justify-content: center;
-    margin: 6rem 4rem;
+    text-align: center;
+    /* margin: 6rem 4rem; */
 }
 
 .buyingFlex{
     display: flex;
-    /* width: 36rem; */
-    /* margin: 0rem 1rem;
-    justify-content: space-between;
-    cursor: pointer;
-    border-radius: 15px 50px; */
 }
 
 .colFlex{
@@ -36,4 +32,8 @@
 .botSpacer{
     height: 10rem;
     width: 100%;
+}
+
+.rentSpacer{
+    height: 2rem;
 }

@@ -56,13 +56,42 @@ const Calculator = () => {
     const [ aer, setAer ] = useState(4.5); 
     const [ accruedSavingsBuy, setAccruedSavingsBuy ] = useState(0);
 
+
+    // const ref = useRef(null);
+
+    // Scroll events
+    const handleScrollClickTop = () => {
+        const element = document.getElementById('#top-section')
+        element.scrollIntoView({ behaviour: 'smooth', block: 'center' });
+    };
+
+    const handleScrollClickBuy = () => {
+        const element = document.getElementById('#buy-section')
+        element.scrollIntoView({ behaviour: 'smooth', block: 'end' });
+    };
+
+    const handleScrollClickRent = () => {
+        const element = document.getElementById('#rent-section')
+        element.scrollIntoView({ behaviour: 'smooth', block: 'end' });
+    };
+
+    const handleScrollClickSave = () => {
+        const element = document.getElementById('#save-section')
+        element.scrollIntoView({ behaviour: 'smooth', block: 'center' });
+    };
+
+    const handleScrollClickHow = () => {
+        const element = document.getElementById('#how-section')
+        element.scrollIntoView({ behaviour: 'smooth', block: 'start' });
+    };
+
     return(
-        <section className={style.Calculator}>
+        <div className={style.Calculator}>
             <div className={style.buyingFlex}>
                 <Totals
                     totalSpendBuy={totalSpendBuy}
                     currentSavings={currentSavings}
-                    depositAmount={depAmount} 
+                    depositAmount={depAmount}
                     stampDuty={stampDutyCost}
                     fixedTerm={fixedTerm}
                     setFixedTerm={setFixedTerm}
@@ -86,6 +115,7 @@ const Calculator = () => {
                 />
                 <div className={style.colFlex}>
                     <Introduction />
+                    <div id='#top-section'></div>
                     <UserInputs 
                         propValue={propValue}
                         setPropValue={setPropValue}
@@ -119,7 +149,7 @@ const Calculator = () => {
                             saveBuy={saveBuy}
                         />
                     </div>
-                    <div className={style.rentSection}>
+                    <div id='#buy-section' className={style.rentSection}>
                         <Renting 
                             rent={rent}
                             currentSavings={currentSavings}
@@ -133,7 +163,7 @@ const Calculator = () => {
                             setTotalSpendRent={setTotalSpendRent}
                         />
                     </div>
-                    <div className={style.saveSection}>
+                    <div id='#rent-section' className={style.saveSection}>
                         <Saving
                             fixedTerm={fixedTerm}
                             saveBuy={saveBuy}
@@ -145,13 +175,22 @@ const Calculator = () => {
                             aer={aer}
                             setAer={setAer}
                         />
+                        <div id='#save-section'></div>
                     </div>
-                    <Calculations />
+                    <div id='#how-section'>
+                        <Calculations />
+                    </div> 
                 </div> 
-                <SideNav />
+                <SideNav 
+                    handleScrollClickTop={handleScrollClickTop}
+                    handleScrollClickBuy={handleScrollClickBuy}
+                    handleScrollClickRent={handleScrollClickRent}
+                    handleScrollClickSave={handleScrollClickSave}
+                    handleScrollClickHow={handleScrollClickHow}
+                />
             </div>
             <div className={style.botSpacer}></div>
-        </section>
+        </div>
     );
 }
 

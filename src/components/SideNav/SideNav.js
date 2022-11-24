@@ -2,18 +2,24 @@ import React from 'react';
 import style from './SideNav.module.css';
 
 
-const SideNav = () => {
+const SideNav = ({ 
+    handleScrollClickTop, 
+    handleScrollClickBuy, 
+    handleScrollClickRent, 
+    handleScrollClickSave, 
+    handleScrollClickHow
+}) => {
 
     // VIEW
     return(
         <div className={style.SideNav}>
             <div className={style.fixSideBar}>
                 <ul>
-                    <li>Top</li>
-                    <li>Buying</li>
-                    <li>Renting</li>
-                    <li>Saving</li>
-                    <li>How is it calculated</li>
+                    <li onClick={handleScrollClickTop}>Top</li>
+                    <li onClick={handleScrollClickBuy}>Buying</li>
+                    <li onClick={handleScrollClickRent}>Renting</li>
+                    <li onClick={handleScrollClickSave}>Saving</li>
+                    <li onClick={handleScrollClickHow}>How is it calculated</li>
                 </ul>
             </div>
         </div>
