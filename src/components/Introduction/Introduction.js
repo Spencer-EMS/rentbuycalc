@@ -6,9 +6,9 @@ const Introduction = () => {
     return(
         <div className={style.Intro}>
             <div className={style.IntroBox}>
-                <p>
+                <h5>
                     Should I buy now OR rent and keep saving?
-                </p>
+                </h5>
                 <p>
                     The Rent vs Buy calculator seeks to answer this important question, by comparing what would happen if you decided to buy now OR rent and save the difference.
                 </p>

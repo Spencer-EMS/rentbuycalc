@@ -1,12 +1,12 @@
 .App {
-  text-align: center;
+  
   background-color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   color: #000;
-  overflow: scroll;
 }
 
 .App h1 {
@@ -24,4 +24,8 @@
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+}
+
+.navSpacer{
+  height: 6rem;
 }

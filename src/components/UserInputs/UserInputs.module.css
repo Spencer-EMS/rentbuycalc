@@ -1,9 +1,10 @@
 .UserInputs{
-    margin: 2rem auto;
+    margin: 2rem 0 1rem;
     border: 2px solid #05A;
     border-radius: 8px;
     padding: 1rem;
     box-shadow: 0 10px 6px -6px #777;
+    /* width: 100%; */
 }
 
 .UserInputs p{

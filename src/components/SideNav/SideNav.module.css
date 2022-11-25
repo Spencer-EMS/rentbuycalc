@@ -1,0 +1,27 @@
+.SideNav{
+    width: 12rem;
+    height: 100%;
+    font-weight: 600;
+}
+
+.fixSideBar{
+    position: fixed;
+    top: 6rem;
+}
+
+.fixSideBar ul{
+    list-style-type: none;
+    text-align: right;
+}
+
+.fixSideBar li{
+    margin: 2rem 0;
+    font-size: 0.8rem;
+    width: 5rem;
+}
+
+.fixSideBar li:hover{
+    color: #05a;
+    font-weight: bold;
+    cursor: pointer;
+}

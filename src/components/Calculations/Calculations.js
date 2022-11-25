@@ -216,7 +216,7 @@ const Calculations = () => {
                 </div>
                 <div className={style.netPosition}>
                     <h6>Net Gain/Loss: </h6>
-                    <p>Your gain or loss based upon all costs, mortgage repayments and savings: Net position - Total spend</p>
+                    <p>Your gain or loss based upon all rent costs and savings: Net position - Total spend</p>
                 </div>
         
                 <div className={style.midBorder1}></div>
