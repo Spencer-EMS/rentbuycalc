@@ -114,7 +114,7 @@ const Calculator = () => {
                     setAccruedSavingsRent={setAccruedSavingsRent}
                 />
                 <div className={style.colFlex}>
-                    <Introduction />
+                <Introduction />
                     <div id='#top-section'></div>
                     <UserInputs 
                         propValue={propValue}
