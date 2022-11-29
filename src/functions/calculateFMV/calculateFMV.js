@@ -1,12 +1,14 @@
 
-// Formula calculates Future Market Value and Compound Interest and returns them as an array
+// Formula calculates Future Market Value of an investment using compound interest
 
 const calculateFMV = function(principle, intRate, timePeriods, chargedPerPeriod) {
     const p = principle;
     const r = intRate/100;
     const t = timePeriods;
     const n = chargedPerPeriod; 
-    const futureValue = p*((1+(r/n))**(n*t));
+    let futureValue = p*((1+(r/n))**(n*t));
+    futureValue = futureValue.toFixed(2);
+    futureValue = parseFloat(futureValue);
     return futureValue;
 }
 

@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import style from './Totals.module.css';
 
+// Functions
+import calculateCompoundInterest from '../../functions/calculateCompInterest/calculateCompInterest';
+// variables(principle, intRate, timePeriods, chargedPerPeriod)
+
+import calculateFMV from '../../functions/calculateFMV/calculateFMV';
+// varibles(principle, intRate, timePeriods, chargedPerPeriod)
+
+import calculateFutureValue from '../../functions/calculateFutureValue/calculateFutureValue';
+// varibles(principle, intRate, timePeriods, chargedPerPeriod)
+
 const Totals = ({
         currentSavings,
         depositAmount,
@@ -39,48 +49,29 @@ const Totals = ({
     const [ buyAmountSaved, setBuyAmountSaved ] = useState(0);
     const [ rentAmountSaved, setRentAmountSaved ] = useState(0);
 
-    // TESTING
-    // const [ buyRoi, setBuyRoi ] = useState(0);
 
-    // useEffect(() => {  // Buy ROI 
-    //     const roi = (totalSpendBuy + );
-    //     setTotalSpend(totalRentEquity);
-    // }, []);
-
-    // Calculating Compound interest on BUY savings [Formula: A=(P(1+r/n)^nt)+((PMT((1+r/n)**(nt))-1)/(r/n))]
+    // Calculating Compound interest on BUY savings [Formula: A = (P(1+r/n)^nt) + ((PMT((1+r/n)**(nt))-1)/(r/n)) ]
     useEffect(() => { 
-        var accruedAmount;
         const remainingSavings = currentSavings - sumUpFrontCosts - depositAmount;
-        // console.log("remainingSavings", remainingSavings);
-        accruedAmount = remainingSavings*((1+((aer/100)/12))**(12*fixedTerm));
-        // console.log("accruedAmount", accruedAmount);
-        const interestEarned = accruedAmount - remainingSavings;
-        var rOverN = (aer/100)/12;
-        var numerator = (saveBuy*(((1+(rOverN))**(12*fixedTerm))-1));
-        accruedAmount = accruedAmount + (numerator/(rOverN));
+        const remainingSavingsAndInterest = calculateFMV( remainingSavings, aer, fixedTerm, 12 );
+        const interestOnRemainingSavings = calculateCompoundInterest( remainingSavings, aer, fixedTerm, 12 );
+        const monthlySavingsAndInterest = calculateFutureValue( saveBuy, aer, fixedTerm, 12 );
+        const accruedAmount = remainingSavingsAndInterest + monthlySavingsAndInterest;
         setAccruedSavingsBuy(accruedAmount);
-        setBuyInterestEarned(interestEarned);
+        setBuyInterestEarned(interestOnRemainingSavings);
     }, [fixedTerm, currentSavings, aer, sumUpFrontCosts, depositAmount, setAccruedSavingsBuy, saveBuy]);
 
     // Calculating Compound interest on RENT savings [Formula: A=(P(1+r/n)^nt)  +  ((PMT((1+r/n)**(nt))-1)/(r/n))]
     useEffect(() => { 
-        var accruedAmount;
         const remainingSavings = currentSavings - upFrontRentCost - securityDeposit;
-        // console.log("remainingSavings", remainingSavings);
-        accruedAmount = remainingSavings*((1+((aer/100)/12))**(12*fixedTerm));
-        const interestEarned = accruedAmount - remainingSavings;
-        var rOverN = (aer/100)/12;
-        var numerator = (saveRent*(((1+(rOverN))**(12*fixedTerm))-1));
-        accruedAmount = accruedAmount + (numerator/rOverN);
-        // console.log("accruedAmount", accruedAmount);
+        const remainingSavingsAndInterest = calculateFMV( remainingSavings, aer, fixedTerm, 12 );
+        const interestOnRemainingSavings = calculateCompoundInterest( remainingSavings, aer, fixedTerm, 12 );
+        const monthlySavingsAndInterest = calculateFutureValue( saveRent, aer, fixedTerm, 12 );
+        const accruedAmount = remainingSavingsAndInterest + monthlySavingsAndInterest;
         setAccruedSavingsRent(accruedAmount);
-        setRentInterestEarned(interestEarned);
+        setRentInterestEarned(interestOnRemainingSavings);
     }, [fixedTerm, currentSavings, aer, upFrontRentCost, securityDeposit, setAccruedSavingsRent, saveRent]);
-    
-    // useEffect(() => { // Rent Equity
-    //     const totalRentEquity = ((securityDeposit) + (currentSavings - upFrontRentCost - securityDeposit) + accruedSavingsRent);
-    //     setRentEquity(totalRentEquity);
-    // }, [securityDeposit, currentSavings, upFrontRentCost, accruedSavingsRent]);
+
 
     useEffect(() => { // Buy Equity
         const totalBuyEquity = (depositAmount + capitalGains + capitalRepaid);

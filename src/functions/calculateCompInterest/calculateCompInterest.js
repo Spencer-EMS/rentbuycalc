@@ -1,4 +1,4 @@
-// Formula calculates Future Market Value and Compound Interest and returns them as an array
+// Formula calculates and returns Compound Interest
 
 const calculateCompInterest = function(principle, intRate, timePeriods, chargedPerPeriod) {
     const p = principle;
@@ -6,8 +6,10 @@ const calculateCompInterest = function(principle, intRate, timePeriods, chargedP
     const t = timePeriods;
     const n = chargedPerPeriod; 
     const futureValue = p*((1+(r/n))**(n*t));
-    const interest = futureValue - p;
-    return [ interest, futureValue ];
+    let interest = futureValue - p;
+    interest = interest.toFixed(2);
+    interest = parseFloat(interest);
+    return interest;
 }
 
 export default calculateCompInterest;
